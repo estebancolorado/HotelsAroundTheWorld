@@ -12,25 +12,23 @@ import java.io.IOException;
 
 
 @ComponentScan("com.ceiba")
-public class ApplicationMock {
-	
-
+public class ApplicationMock
+{
     @Bean
-    public DataSource h2DataSource() {
+    public DataSource h2DataSource()
+    {
         return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).build();
     }
 
     @Bean(initMethod = "migrate")
-    Flyway flyway(DataSource dataSource) throws IOException {
-
-        return Flyway.configure().locations("filesystem:../src/main/resources","filesystem:src/test/resources").baselineOnMigrate(true)
-                .dataSource(dataSource).load();
-
+    Flyway flyway(DataSource dataSource) throws IOException
+    {
+        return Flyway.configure().locations("filesystem:../src/main/resources","filesystem:src/test/resources").baselineOnMigrate(true).dataSource(dataSource).load();
     }
 
     @Bean
-    public NamedParameterJdbcTemplate namedParameterJdbcTemplate(DataSource dataSource) {
+    public NamedParameterJdbcTemplate namedParameterJdbcTemplate(DataSource dataSource)
+    {
         return new NamedParameterJdbcTemplate(dataSource);
     }
-	
 }

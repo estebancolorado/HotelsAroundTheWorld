@@ -18,6 +18,6 @@ spring:
       type: com.zaxxer.hikari.HikariDataSource
       jdbcUrl: jdbc:postgresql://localhost:5432/postgres
       username: postgres
-      password: default
+      password: 1038418594
       hikari:
          poolName: pool
