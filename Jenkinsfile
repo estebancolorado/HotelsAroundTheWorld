@@ -1,9 +1,7 @@
-@Library('ceiba-jenkins-library')
-pipeline
-{
+@Library('ceiba-jenkins-library') _
+pipeline {
   //Donde se va a ejecutar el Pipeline
-  agent
-  {
+  agent {
     label 'Slave_Induccion'
   }
 
@@ -15,7 +13,7 @@ pipeline
 
   //Una sección que define las herramientas “preinstaladas” en Jenkins
   tools {
-    jdk 'JDK14_Centos' //Verisión preinstalada en la Configuración del Master
+    jdk 'JDK17_Centos' //Verisión preinstalada en la Configuración del Master
   }
 /*	Versiones disponibles
       JDK8_Mac
@@ -36,23 +34,21 @@ pipeline
         checkout scm
       }
     }
-
     stage('Compile & Unit Tests') {
-      steps{
-        echo "------------>Compile & Unit Tests<------------"
-        sh 'chmod +x gradlew'
-        sh './gradlew --b ./build.gradle test'
-      }
+       steps{
+             echo "------------>compile & Unit Tests<------------"
+             sh 'chmod +x gradlew'
+             sh './gradlew --b ./build.gradle test'
+       }
     }
+
 
     stage('Static Code Analysis') {
       steps{
         echo '------------>Análisis de código estático<------------'
-        withSonarQubeEnv('Sonar') {
-            sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
-        }
-        sonar.projectKey: co.com.ceiba.adn:HotelsAroundTheWorld-esteban.colorado
-        sonar.projectName: CeibaADN-HotelsAroundTheWorld(esteban.colorado)
+               sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:HotelsAroundTheWorld-esteban.colorado',
+               sonarName:'"HotelsAroundTheWorld(esteban.colorado)"',
+               sonarPathProperties:'./sonar-project.properties')
       }
     }
 
@@ -70,9 +66,11 @@ pipeline
     }
     success {
       echo 'This will run only if successful'
+      junit '**/test-results/test/*.xml'
     }
     failure {
       echo 'This will run only if failed'
+      mail (to: 'esteban.colorado@ceiba.com.co',subject: "Failed Pipeline:${currentBuild.fullDisplayName}",body: "Something is wrong with ${env.BUILD_URL}")
     }
     unstable {
       echo 'This will run only if the run was marked as unstable'
