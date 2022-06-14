@@ -46,7 +46,7 @@ pipeline {
     stage('Static Code Analysis') {
       steps{
         echo '------------>Análisis de código estático<------------'
-               sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:GitHub-esteban.colorado',
+               sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:HotelsAroundTheWorld-esteban.colorado',
                sonarName:'"HotelsAroundTheWorld(esteban.colorado)"',
                sonarPathProperties:'./sonar-project.properties')
       }
