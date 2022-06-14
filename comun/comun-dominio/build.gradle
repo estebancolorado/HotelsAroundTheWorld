@@ -1,0 +1,8 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}

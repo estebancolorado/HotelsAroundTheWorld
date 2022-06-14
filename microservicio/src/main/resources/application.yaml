@@ -1,0 +1,23 @@
+jasypt:
+   encryptor:
+      password: ${jasyptpwd:secretkey}
+      algorithm: PBEWithMD5AndDES
+
+server:
+   port: 8080
+   servlet:
+      context-path: /microservice
+      session:
+         timeout: 21600s
+springdoc:
+   swagger-ui:
+      path: /swagger-ui.html
+spring:
+   datasource:
+      driver-class-name: org.postgresql.Driver
+      type: com.zaxxer.hikari.HikariDataSource
+      jdbcUrl: jdbc:postgresql://localhost:5432/postgres
+      username: postgres
+      password: default
+      hikari:
+         poolName: pool
