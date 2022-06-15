@@ -1,6 +1,6 @@
 package com.ceiba.validator;
 
-public class ValidateObject
+public final class ValidateObject
 {
     private ValidateObject()
     {

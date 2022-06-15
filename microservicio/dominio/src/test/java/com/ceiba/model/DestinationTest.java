@@ -23,6 +23,7 @@ class DestinationTest
 
         Assertions.assertEquals("Nueva York", destination.getCity());
         Assertions.assertEquals("Estados Unidos de America", destination.getCountry());
+        Assertions.assertEquals(3, destination.getHotel().getNumberStars());
     }
 
     @Test

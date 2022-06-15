@@ -1,6 +1,6 @@
 package com.ceiba.utilitarian;
 
-public class Message
+public final class Message
 {
     private Message()
     {
@@ -17,4 +17,5 @@ public class Message
     public static final String INVALID_DATE_PATTERN = "Date has not the pattern dd/mm/yyyy";
     public static final String CHECKIN_CANNOT_BE_LESS_THAN_TODAY = "Check in date cannot be lees than current date";
     public static final String CHECKOUT_CANNOT_BE_LESS_THAN_OR_EQUAL_CHECKIN = "Check out date cannot be lees than or equal check in date";
+    public static final String RESERVATION_DOES_NOT_EXISTS_WITH_ID = "There is no reservation on id ";
 }

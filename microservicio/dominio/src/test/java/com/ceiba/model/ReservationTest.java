@@ -28,6 +28,7 @@ class ReservationTest
 
         Assertions.assertEquals(FormatDate.getDate("10/07/2022"), reservation.getCheckIn());
         Assertions.assertEquals(FormatDate.getDate("20/07/2022"), reservation.getCheckOut());
+        Assertions.assertEquals("Nueva York", reservation.getDestination().getCity());
     }
 
     @Test

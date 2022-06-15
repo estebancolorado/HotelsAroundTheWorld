@@ -5,7 +5,7 @@ import com.ceiba.validator.ValidateString;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class FormatDate
+public final class FormatDate
 {
     private static final String FORMAT_DD_MM_YYYY = "dd/MM/yyyy";
 

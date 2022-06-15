@@ -15,11 +15,26 @@ class HotelTest
         var room = Room.create(numberOfGuests);
         var rooms = List.of(room);
 
-        var numberOfStars = 3;
-        var hotel = Hotel.create(numberOfStars, rooms);
+        var hotelCaseOne = Hotel.create(1, rooms);
+        var hotelCaseTwo = Hotel.create(2, rooms);
+        var hotelCaseThree = Hotel.create(3, rooms);
+        var hotelCaseFour = Hotel.create(4, rooms);
+        var hotelCaseFive = Hotel.create(5, rooms);
 
-        hotel.getRooms().forEach(item -> Assertions.assertEquals(numberOfGuests, item.getNumberGuests()));
-        Assertions.assertEquals(numberOfStars, hotel.getNumberStars());
+        hotelCaseOne.getRooms().forEach(item -> Assertions.assertEquals(numberOfGuests, item.getNumberGuests()));
+        Assertions.assertEquals(1, hotelCaseOne.getNumberStars());
+
+        hotelCaseTwo.getRooms().forEach(item -> Assertions.assertEquals(numberOfGuests, item.getNumberGuests()));
+        Assertions.assertEquals(2, hotelCaseTwo.getNumberStars());
+
+        hotelCaseThree.getRooms().forEach(item -> Assertions.assertEquals(numberOfGuests, item.getNumberGuests()));
+        Assertions.assertEquals(3, hotelCaseThree.getNumberStars());
+
+        hotelCaseFour.getRooms().forEach(item -> Assertions.assertEquals(numberOfGuests, item.getNumberGuests()));
+        Assertions.assertEquals(4, hotelCaseFour.getNumberStars());
+
+        hotelCaseFive.getRooms().forEach(item -> Assertions.assertEquals(numberOfGuests, item.getNumberGuests()));
+        Assertions.assertEquals(5, hotelCaseFive.getNumberStars());
     }
 
     @Test
