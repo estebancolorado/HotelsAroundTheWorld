@@ -23,7 +23,6 @@ public class ManejadorHealthCheckBloques {
 		this.bloquesRegistrados.put(nombreBloque, salud);
 	}
 
-	@Scheduled(fixedRateString = "${tiempoHealthCheck.tiempo}")
 	public void refrescarListadoErrores() {
 		this.bloquesRegistrados.forEach((llave, valor) -> validarBloque(llave, this.bloquesRegistrados.get(llave)));
 

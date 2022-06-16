@@ -18,7 +18,6 @@ public interface Salud  {
 	
 	/**
 	 * Valida la salud del bloque
-	 * @throws ExepcionBloqueSinServicio
 	 */
 	public void verificar() throws ExcepcionTecnica;//a�adir
 

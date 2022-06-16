@@ -38,7 +38,6 @@ dependencies {
 	runtimeOnly project.ext.db
 	testImplementation project.ext.flyway
 	testImplementation project.ext.flywaytest
-
 	
 	implementation project(':dominio')
 	implementation project(':aplicacion')
@@ -46,6 +45,10 @@ dependencies {
 
 	implementation project(':comun:comun-infraestructura')
 	implementation project(':comun:comun-aplicacion')
+
+	implementation 'org.springframework.boot:spring-boot-starter-aop:2.7.0'
+	implementation 'org.springframework.retry:spring-retry:1.3.3'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
 
 	compileOnly project.ext.lombok
 	annotationProcessor project.ext.lombok
