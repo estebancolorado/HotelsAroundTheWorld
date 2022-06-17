@@ -1,4 +1,4 @@
-package com.ceiba.service.reservation;
+package com.ceiba.service;
 
 import com.ceiba.model.Room;
 import org.springframework.stereotype.Service;

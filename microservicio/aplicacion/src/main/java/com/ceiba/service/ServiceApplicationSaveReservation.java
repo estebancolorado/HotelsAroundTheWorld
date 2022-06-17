@@ -1,4 +1,4 @@
-package com.ceiba.service.reservation;
+package com.ceiba.service;
 
 import com.ceiba.dto.ReservationDTO;
 import com.ceiba.dto.ReservationSummaryDTO;

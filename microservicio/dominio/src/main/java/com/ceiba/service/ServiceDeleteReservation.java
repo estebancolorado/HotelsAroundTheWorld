@@ -1,4 +1,4 @@
-package com.ceiba.service.reservation;
+package com.ceiba.service;
 
 import com.ceiba.port.ReservationRepository;
 import com.ceiba.utilitarian.Message;

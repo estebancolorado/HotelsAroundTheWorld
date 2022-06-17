@@ -1,4 +1,4 @@
-package com.ceiba.service.reservation;
+package com.ceiba.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
