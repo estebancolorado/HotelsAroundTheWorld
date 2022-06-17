@@ -12,13 +12,13 @@ public class ServiceDeleteReservation
     @Autowired
     ReservationRepository reservationRepository;
 
-    public void implement(Long id)
+    public Long implement(Long id)
     {
         if(ValidateObject.isNull(this.reservationRepository.getById(id)))
         {
             throw new IllegalArgumentException(Message.RESERVATION_DOES_NOT_EXISTS_WITH_ID + id);
         }
 
-        this.reservationRepository.delete(id);
+        return this.reservationRepository.delete(id);
     }
 }

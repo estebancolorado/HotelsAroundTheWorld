@@ -12,6 +12,8 @@ public class ServiceGetReservationByID
 {
     @Autowired
     ReservationRepository reservationRepository;
+    @Autowired
+    ServiceCalculatePrice serviceCalculatePrice;
 
     public ReservationSummaryDTO implement(Long id)
     {
@@ -21,6 +23,8 @@ public class ServiceGetReservationByID
         {
                 throw new IllegalArgumentException(Message.RESERVATION_DOES_NOT_EXISTS_WITH_ID + id);
         }
+
+        reservation.setPesosPrice(this.serviceCalculatePrice.calculateCurrency(reservation.getDollarPrice()));
 
         return reservation;
     }

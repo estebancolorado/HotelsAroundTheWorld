@@ -2,39 +2,92 @@ package com.ceiba.adapter.repository.jdbc.implementation;
 
 import com.ceiba.adapter.entity.HotelEntity;
 import com.ceiba.adapter.repository.jdbc.HotelDAO;
+import com.ceiba.adapter.repository.jdbc.mapper.HotelMapper;
+import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
+import com.ceiba.infraestructura.jdbc.EjecucionBaseDeDatos;
+import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
 public class HotelDAOImplementation implements HotelDAO
 {
+    private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
+    private final HotelMapper hotelMapper;
+    public HotelDAOImplementation(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate, HotelMapper hotelMapper)
+    {
+        this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
+        this.hotelMapper = hotelMapper;
+    }
+
+    @SqlStatement(namespace = "hotel", value = "findAllHotels")
+    private static String findAllSQL;
+
+    @SqlStatement(namespace = "hotel", value = "findHotelById")
+    private static String findByIdSQL;
+
+    @SqlStatement(namespace = "hotel", value = "saveHotel")
+    private static String saveSQL;
+
+    @SqlStatement(namespace = "hotel", value = "updateHotelById")
+    private static String updateSQL;
+
+    @SqlStatement(namespace = "hotel", value = "deleteHotelById")
+    private static String deleteSQL;
+
     @Override
     public List<HotelEntity> findAll()
     {
-        return null;
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+
+        paramSource.getValues();
+
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(findAllSQL, paramSource, hotelMapper);
     }
 
     @Override
-    public HotelEntity findById()
+    public HotelEntity findById(Long id)
     {
-        return null;
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+
+        paramSource.addValue("id", id);
+
+        return EjecucionBaseDeDatos.obtenerUnObjetoONull(()-> this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(findByIdSQL,paramSource, hotelMapper));
     }
 
     @Override
-    public void save(HotelEntity hotel)
+    public Long save(HotelEntity hotel)
     {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
 
+        paramSource.addValue("number_stars", hotel.getNumberStars());
+
+        return this.customNamedParameterJdbcTemplate.crear(paramSource, saveSQL);
     }
 
     @Override
-    public void update(HotelEntity hotel)
+    public Long update(HotelEntity hotel)
     {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
 
+        paramSource.addValue("number_stars", hotel.getNumberStars());
+        paramSource.addValue("id", hotel.getId());
+
+        this.customNamedParameterJdbcTemplate.actualizar(paramSource, updateSQL);
+
+        return hotel.getId();
     }
 
     @Override
-    public void delete(Long id)
+    public Long delete(Long id)
     {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
 
+        paramSource.addValue("id", id);
+
+        EjecucionBaseDeDatos.obtenerUnObjetoONull(()-> this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(deleteSQL,paramSource));
+
+        return id;
     }
 }

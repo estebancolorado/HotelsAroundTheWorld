@@ -1,0 +1,1 @@
+select * from destination where id = :id;

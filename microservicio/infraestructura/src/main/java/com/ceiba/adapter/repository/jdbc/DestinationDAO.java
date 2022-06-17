@@ -6,8 +6,8 @@ import java.util.List;
 public interface DestinationDAO
 {
     List<DestinationEntity> findAll();
-    DestinationEntity findById();
-    void save(DestinationEntity destination);
-    void update(DestinationEntity destination);
-    void delete(Long id);
+    DestinationEntity findById(Long id);
+    Long save(DestinationEntity destination, Long hotelId);
+    Long update(DestinationEntity destination);
+    Long delete(Long id);
 }

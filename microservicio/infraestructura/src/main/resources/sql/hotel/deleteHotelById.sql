@@ -1,0 +1,1 @@
+DELETE from hotel where id = :id;

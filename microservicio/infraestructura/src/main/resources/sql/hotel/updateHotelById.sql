@@ -1,0 +1,1 @@
+UPDATE hotel SET number_stars = :number_stars WHERE id = :id;

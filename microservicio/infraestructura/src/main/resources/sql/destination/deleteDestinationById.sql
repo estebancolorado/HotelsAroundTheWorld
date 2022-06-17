@@ -1,0 +1,1 @@
+DELETE from destination where id = :id;

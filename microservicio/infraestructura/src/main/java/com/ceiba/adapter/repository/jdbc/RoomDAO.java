@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface RoomDAO
 {
-    List<RoomEntity> findAll();
-    RoomEntity findById();
-    void save(RoomEntity room);
-    void update(RoomEntity room);
-    void delete(Long id);
+    List<RoomEntity> findAll(Long hotelId);
+    RoomEntity findById(Long id);
+    Long save(RoomEntity room, Long hotelId);
+    Long update(RoomEntity room);
+    Long delete(Long id);
 }

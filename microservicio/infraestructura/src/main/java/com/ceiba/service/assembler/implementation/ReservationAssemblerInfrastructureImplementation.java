@@ -30,12 +30,12 @@ public class ReservationAssemblerInfrastructureImplementation implements Reserva
     @Override
     public ReservationEntity assembleEntityFromDomain(Reservation domain)
     {
-        return new ReservationEntity(1L, FormatDate.getStringDate(domain.getCheckIn()), FormatDate.getStringDate(domain.getCheckOut()), 0.0, 0.0, getDestinationAssembler().assembleEntityFromDomain(domain.getDestination()));
+        return new ReservationEntity(1L, FormatDate.getStringDate(domain.getCheckIn()), FormatDate.getStringDate(domain.getCheckOut()), 0.0, getDestinationAssembler().assembleEntityFromDomain(domain.getDestination()));
     }
 
     @Override
     public ReservationSummaryDTO assembleDTOFromEntity(ReservationEntity entity)
     {
-        return new ReservationSummaryDTO(entity.getId(), entity.getCheckIn(), entity.getCheckOut(), entity.getDollarPrice(), entity.getPesosPrice(), getDestinationAssembler().assembleDomainFromEntity(entity.getDestination()));
+        return new ReservationSummaryDTO(entity.getId(), entity.getCheckIn(), entity.getCheckOut(), entity.getPrice(), 0.0, getDestinationAssembler().assembleDomainFromEntity(entity.getDestination()));
     }
 }

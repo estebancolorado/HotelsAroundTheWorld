@@ -9,8 +9,8 @@ public class ServiceApplicationDeleteReservation
     @Autowired
     ServiceDeleteReservation serviceDeleteReservation;
 
-    public void implement(Long id)
+    public Long implement(Long id)
     {
-        this.serviceDeleteReservation.implement(id);
+        return this.serviceDeleteReservation.implement(id);
     }
 }

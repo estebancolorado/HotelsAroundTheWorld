@@ -1,0 +1,1 @@
+DELETE from reservation where id = :id;

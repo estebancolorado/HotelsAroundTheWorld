@@ -1,0 +1,1 @@
+UPDATE destination SET city = :city, country = :country WHERE id = :id;

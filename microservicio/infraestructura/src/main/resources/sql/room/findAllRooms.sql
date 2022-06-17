@@ -1,0 +1,1 @@
+select * from room where hotel = :hotel;

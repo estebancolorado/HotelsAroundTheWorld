@@ -1,0 +1,1 @@
+DELETE from room where id = :id;

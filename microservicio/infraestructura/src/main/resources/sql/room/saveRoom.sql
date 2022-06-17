@@ -1,0 +1,1 @@
+insert into room(number_guests, hotel) values(:number_guests, :hotel);

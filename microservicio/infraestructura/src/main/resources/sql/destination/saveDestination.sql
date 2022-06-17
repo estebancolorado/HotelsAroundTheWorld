@@ -1,0 +1,1 @@
+insert into destination(city, country, hotel) values(:city, :country, :hotel);
