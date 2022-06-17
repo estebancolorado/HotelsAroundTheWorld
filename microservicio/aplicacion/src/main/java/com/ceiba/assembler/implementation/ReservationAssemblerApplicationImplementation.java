@@ -1,10 +1,10 @@
-package com.ceiba.service.assembler.implementation;
+package com.ceiba.assembler.implementation;
 
 import com.ceiba.dto.ReservationDTO;
 import com.ceiba.formatter.FormatDate;
 import com.ceiba.model.Reservation;
-import com.ceiba.service.assembler.ReservationAssemblerApplication;
-import static com.ceiba.service.assembler.implementation.DestinationAssemblerApplicationImplementation.getDestinationAssembler;
+import com.ceiba.assembler.ReservationAssemblerApplication;
+import static com.ceiba.assembler.implementation.DestinationAssemblerApplicationImplementation.getDestinationAssembler;
 
 public class ReservationAssemblerApplicationImplementation implements ReservationAssemblerApplication
 {

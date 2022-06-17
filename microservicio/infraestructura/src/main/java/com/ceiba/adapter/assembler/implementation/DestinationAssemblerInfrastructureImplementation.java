@@ -1,9 +1,8 @@
-package com.ceiba.service.assembler.implementation;
+package com.ceiba.adapter.assembler.implementation;
 
+import com.ceiba.adapter.assembler.DestinationAssemblerInfrastructure;
 import com.ceiba.adapter.entity.DestinationEntity;
 import com.ceiba.model.Destination;
-import com.ceiba.service.assembler.DestinationAssemblerInfrastructure;
-import static com.ceiba.service.assembler.implementation.HotelAssemblerInfrastructureImplementation.getHotelAssembler;
 
 public class DestinationAssemblerInfrastructureImplementation implements DestinationAssemblerInfrastructure
 {
@@ -22,12 +21,12 @@ public class DestinationAssemblerInfrastructureImplementation implements Destina
     @Override
     public Destination assembleDomainFromEntity(DestinationEntity entity)
     {
-        return Destination.create(entity.getCity(), entity.getCountry(), getHotelAssembler().assembleDomainFromEntity(entity.getHotel()));
+        return Destination.create(entity.getCity(), entity.getCountry(), HotelAssemblerInfrastructureImplementation.getHotelAssembler().assembleDomainFromEntity(entity.getHotel()));
     }
 
     @Override
     public DestinationEntity assembleEntityFromDomain(Destination domain)
     {
-        return new DestinationEntity(1L, domain.getCity(), domain.getCountry(), getHotelAssembler().assembleEntityFromDomain(domain.getHotel()));
+        return new DestinationEntity(1L, domain.getCity(), domain.getCountry(), HotelAssemblerInfrastructureImplementation.getHotelAssembler().assembleEntityFromDomain(domain.getHotel()));
     }
 }

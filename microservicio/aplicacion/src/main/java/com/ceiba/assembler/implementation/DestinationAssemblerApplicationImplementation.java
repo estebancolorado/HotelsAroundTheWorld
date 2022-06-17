@@ -1,10 +1,9 @@
-package com.ceiba.service.assembler.implementation;
+package com.ceiba.assembler.implementation;
 
 
+import com.ceiba.assembler.DestinationAssemblerApplication;
 import com.ceiba.dto.DestinationDTO;
 import com.ceiba.model.Destination;
-import com.ceiba.service.assembler.DestinationAssemblerApplication;
-import static com.ceiba.service.assembler.implementation.HotelAssemblerApplicationImplementation.getHotelAssembler;
 
 public class DestinationAssemblerApplicationImplementation implements DestinationAssemblerApplication
 {
@@ -23,12 +22,12 @@ public class DestinationAssemblerApplicationImplementation implements Destinatio
     @Override
     public Destination assembleDomainFromDTO(DestinationDTO dto)
     {
-        return Destination.create(dto.getCity(), dto.getCountry(), getHotelAssembler().assembleDomainFromDTO(dto.getHotel()));
+        return Destination.create(dto.getCity(), dto.getCountry(), HotelAssemblerApplicationImplementation.getHotelAssembler().assembleDomainFromDTO(dto.getHotel()));
     }
 
     @Override
     public DestinationDTO assembleDTOFromDomain(Destination domain)
     {
-        return new DestinationDTO(domain.getCity(), domain.getCountry(), getHotelAssembler().assembleDTOFromDomain(domain.getHotel()));
+        return new DestinationDTO(domain.getCity(), domain.getCountry(), HotelAssemblerApplicationImplementation.getHotelAssembler().assembleDTOFromDomain(domain.getHotel()));
     }
 }

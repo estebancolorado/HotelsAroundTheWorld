@@ -1,4 +1,4 @@
-package com.ceiba.service.assembler;
+package com.ceiba.assembler;
 
 public interface AssemblerApplication<D, T>
 {

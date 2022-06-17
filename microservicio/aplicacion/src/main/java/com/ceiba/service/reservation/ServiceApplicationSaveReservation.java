@@ -4,7 +4,7 @@ import com.ceiba.dto.ReservationDTO;
 import com.ceiba.dto.ReservationSummaryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import static com.ceiba.service.assembler.implementation.ReservationAssemblerApplicationImplementation.getReservationAssembler;
+import static com.ceiba.assembler.implementation.ReservationAssemblerApplicationImplementation.getReservationAssembler;
 
 @Component
 public class ServiceApplicationSaveReservation

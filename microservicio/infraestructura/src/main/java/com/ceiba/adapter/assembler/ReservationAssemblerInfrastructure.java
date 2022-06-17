@@ -1,4 +1,4 @@
-package com.ceiba.service.assembler;
+package com.ceiba.adapter.assembler;
 
 import com.ceiba.adapter.entity.ReservationEntity;
 import com.ceiba.dto.ReservationSummaryDTO;

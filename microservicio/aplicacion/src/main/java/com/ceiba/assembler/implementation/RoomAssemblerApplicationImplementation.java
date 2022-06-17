@@ -1,8 +1,8 @@
-package com.ceiba.service.assembler.implementation;
+package com.ceiba.assembler.implementation;
 
 import com.ceiba.dto.RoomDTO;
 import com.ceiba.model.Room;
-import com.ceiba.service.assembler.RoomAssemblerApplication;
+import com.ceiba.assembler.RoomAssemblerApplication;
 import java.util.List;
 
 public class RoomAssemblerApplicationImplementation implements RoomAssemblerApplication

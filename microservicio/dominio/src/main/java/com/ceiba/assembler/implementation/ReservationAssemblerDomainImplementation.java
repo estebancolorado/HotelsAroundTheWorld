@@ -1,9 +1,9 @@
-package com.ceiba.service.assembler.implementation;
+package com.ceiba.assembler.implementation;
 
+import com.ceiba.assembler.ReservationAssemblerDomain;
 import com.ceiba.dto.ReservationSummaryDTO;
 import com.ceiba.formatter.FormatDate;
 import com.ceiba.model.Reservation;
-import com.ceiba.service.assembler.ReservationAssemblerDomain;
 
 public class ReservationAssemblerDomainImplementation implements ReservationAssemblerDomain
 {

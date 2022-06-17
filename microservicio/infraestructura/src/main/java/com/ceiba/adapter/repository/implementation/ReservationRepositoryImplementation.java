@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.ceiba.service.assembler.implementation.ReservationAssemblerInfrastructureImplementation.getReservationAssembler;
+import static com.ceiba.adapter.assembler.implementation.ReservationAssemblerInfrastructureImplementation.getReservationAssembler;
 
 @Repository
 public class ReservationRepositoryImplementation implements ReservationRepository

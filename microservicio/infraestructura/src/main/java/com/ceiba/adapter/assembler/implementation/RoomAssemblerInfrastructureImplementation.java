@@ -1,8 +1,8 @@
-package com.ceiba.service.assembler.implementation;
+package com.ceiba.adapter.assembler.implementation;
 
 import com.ceiba.adapter.entity.RoomEntity;
 import com.ceiba.model.Room;
-import com.ceiba.service.assembler.RoomAssemblerInfrastructure;
+import com.ceiba.adapter.assembler.RoomAssemblerInfrastructure;
 import java.util.List;
 
 public class RoomAssemblerInfrastructureImplementation implements RoomAssemblerInfrastructure

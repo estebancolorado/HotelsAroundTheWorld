@@ -1,4 +1,4 @@
-package com.ceiba.service.assembler;
+package com.ceiba.assembler;
 
 import com.ceiba.dto.ReservationDTO;
 import com.ceiba.model.Reservation;

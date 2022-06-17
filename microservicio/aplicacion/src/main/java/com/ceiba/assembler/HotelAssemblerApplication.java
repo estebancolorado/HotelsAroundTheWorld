@@ -1,4 +1,4 @@
-package com.ceiba.service.assembler;
+package com.ceiba.assembler;
 
 import com.ceiba.dto.HotelDTO;
 import com.ceiba.model.Hotel;

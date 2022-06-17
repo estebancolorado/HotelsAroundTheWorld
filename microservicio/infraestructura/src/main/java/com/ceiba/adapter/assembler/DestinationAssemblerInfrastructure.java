@@ -1,4 +1,4 @@
-package com.ceiba.service.assembler;
+package com.ceiba.adapter.assembler;
 
 import com.ceiba.adapter.entity.DestinationEntity;
 import com.ceiba.model.Destination;

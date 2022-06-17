@@ -1,4 +1,4 @@
-package com.ceiba.service.assembler;
+package com.ceiba.adapter.assembler;
 
 import com.ceiba.adapter.entity.RoomEntity;
 import com.ceiba.model.Room;
