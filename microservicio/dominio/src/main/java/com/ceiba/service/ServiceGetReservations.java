@@ -3,17 +3,21 @@ package com.ceiba.service;
 import com.ceiba.dto.ReservationSummaryDTO;
 import com.ceiba.port.ReservationRepository;
 import com.ceiba.utilitarian.Message;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
 public class ServiceGetReservations
 {
-    @Autowired
-    ReservationRepository reservationRepository;
-    @Autowired
-    ServiceCalculatePrice serviceCalculatePrice;
+    private final ServiceCalculatePrice serviceCalculatePrice;
+
+    private final ReservationRepository reservationRepository;
+
+    public ServiceGetReservations(ServiceCalculatePrice serviceCalculatePrice, ReservationRepository reservationRepository)
+    {
+        this.serviceCalculatePrice = serviceCalculatePrice;
+        this.reservationRepository = reservationRepository;
+    }
 
     public List<ReservationSummaryDTO> implement()
     {

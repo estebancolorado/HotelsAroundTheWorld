@@ -3,14 +3,17 @@ package com.ceiba.service;
 import com.ceiba.port.ReservationRepository;
 import com.ceiba.utilitarian.Message;
 import com.ceiba.validator.ValidateObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ServiceDeleteReservation
 {
-    @Autowired
-    ReservationRepository reservationRepository;
+    private final ReservationRepository reservationRepository;
+
+    public ServiceDeleteReservation(ReservationRepository reservationRepository)
+    {
+        this.reservationRepository = reservationRepository;
+    }
 
     public Long implement(Long id)
     {

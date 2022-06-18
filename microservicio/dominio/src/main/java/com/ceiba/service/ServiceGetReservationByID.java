@@ -10,10 +10,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServiceGetReservationByID
 {
-    @Autowired
-    ReservationRepository reservationRepository;
-    @Autowired
-    ServiceCalculatePrice serviceCalculatePrice;
+    private final ServiceCalculatePrice serviceCalculatePrice;
+
+    private final ReservationRepository reservationRepository;
+
+    public ServiceGetReservationByID(ServiceCalculatePrice serviceCalculatePrice, ReservationRepository reservationRepository)
+    {
+        this.serviceCalculatePrice = serviceCalculatePrice;
+        this.reservationRepository = reservationRepository;
+    }
 
     public ReservationSummaryDTO implement(Long id)
     {
