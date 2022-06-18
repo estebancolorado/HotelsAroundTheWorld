@@ -4,7 +4,7 @@ import com.ceiba.adapter.assembler.DestinationAssemblerInfrastructure;
 import com.ceiba.adapter.entity.DestinationEntity;
 import com.ceiba.model.Destination;
 
-public class DestinationAssemblerInfrastructureImplementation implements DestinationAssemblerInfrastructure
+public final class DestinationAssemblerInfrastructureImplementation implements DestinationAssemblerInfrastructure
 {
     private static final DestinationAssemblerInfrastructure INSTANCE = new DestinationAssemblerInfrastructureImplementation();
 

@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @ControllerAdvice
 public class ErrorManager extends ResponseEntityExceptionHandler
 {
-    private static final Logger LOGGER_ERROR = LoggerFactory.getLogger(ErrorManager.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ErrorManager.class);
     private static final ConcurrentHashMap<String, Integer> STATUS_CODES = new ConcurrentHashMap<>();
 
     public ErrorManager()
@@ -36,7 +36,7 @@ public class ErrorManager extends ResponseEntityExceptionHandler
         }
         else
         {
-            LOGGER_ERROR.error(nameException, exception);
+            LOGGER.error(nameException, exception);
             Error error = new Error(nameException, exception.getMessage());
             result = new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
         }

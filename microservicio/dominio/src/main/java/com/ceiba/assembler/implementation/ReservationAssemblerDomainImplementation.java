@@ -5,7 +5,7 @@ import com.ceiba.dto.ReservationSummaryDTO;
 import com.ceiba.formatter.FormatDate;
 import com.ceiba.model.Reservation;
 
-public class ReservationAssemblerDomainImplementation implements ReservationAssemblerDomain
+public final class ReservationAssemblerDomainImplementation implements ReservationAssemblerDomain
 {
     private static final ReservationAssemblerDomain INSTANCE = new ReservationAssemblerDomainImplementation();
 

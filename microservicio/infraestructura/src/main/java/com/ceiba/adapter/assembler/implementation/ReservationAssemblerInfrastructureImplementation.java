@@ -8,7 +8,7 @@ import com.ceiba.model.Reservation;
 
 import static com.ceiba.adapter.assembler.implementation.DestinationAssemblerInfrastructureImplementation.getDestinationAssembler;
 
-public class ReservationAssemblerInfrastructureImplementation implements ReservationAssemblerInfrastructure
+public final class ReservationAssemblerInfrastructureImplementation implements ReservationAssemblerInfrastructure
 {
     private static final ReservationAssemblerInfrastructure INSTANCE = new ReservationAssemblerInfrastructureImplementation();
 

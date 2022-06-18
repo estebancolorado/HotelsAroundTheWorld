@@ -28,10 +28,7 @@ public class ServiceGetReservations
             throw new IllegalArgumentException(Message.THERE_IS_NOT_RESERVATIONS);
         }
 
-        reservations.forEach(reservation ->
-        {
-            reservation.setPesosPrice(this.serviceCalculatePrice.calculateCurrency(reservation.getDollarPrice()));
-        });
+        reservations.forEach(reservation -> reservation.setPesosPrice(this.serviceCalculatePrice.calculateCurrency(reservation.getDollarPrice())));
 
         return reservations;
     }

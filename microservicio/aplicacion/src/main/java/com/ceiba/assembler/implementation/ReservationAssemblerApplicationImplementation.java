@@ -6,7 +6,7 @@ import com.ceiba.model.Reservation;
 import com.ceiba.assembler.ReservationAssemblerApplication;
 import static com.ceiba.assembler.implementation.DestinationAssemblerApplicationImplementation.getDestinationAssembler;
 
-public class ReservationAssemblerApplicationImplementation implements ReservationAssemblerApplication
+public final class ReservationAssemblerApplicationImplementation implements ReservationAssemblerApplication
 {
     private static final ReservationAssemblerApplication INSTANCE = new ReservationAssemblerApplicationImplementation();
 

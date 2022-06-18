@@ -5,7 +5,7 @@ import com.ceiba.validator.ValidateNumber;
 import lombok.Getter;
 
 @Getter
-public class Room
+public final class Room
 {
     private int numberGuests;
 

@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class Hotel
+public final class Hotel
 {
     private int numberStars;
     private List<Room> rooms;

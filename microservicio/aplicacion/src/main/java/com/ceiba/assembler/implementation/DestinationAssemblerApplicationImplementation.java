@@ -5,7 +5,7 @@ import com.ceiba.assembler.DestinationAssemblerApplication;
 import com.ceiba.dto.DestinationDTO;
 import com.ceiba.model.Destination;
 
-public class DestinationAssemblerApplicationImplementation implements DestinationAssemblerApplication
+public final class DestinationAssemblerApplicationImplementation implements DestinationAssemblerApplication
 {
     private static final DestinationAssemblerApplication INSTANCE = new DestinationAssemblerApplicationImplementation();
 

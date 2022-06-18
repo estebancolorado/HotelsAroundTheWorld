@@ -7,7 +7,7 @@ import lombok.Getter;
 import java.time.LocalDate;
 
 @Getter
-public class Reservation
+public final class Reservation
 {
     private LocalDate checkIn;
     private LocalDate checkOut;

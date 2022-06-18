@@ -5,7 +5,7 @@ import com.ceiba.validator.ValidateString;
 import lombok.Getter;
 
 @Getter
-public class Destination
+public final class Destination
 {
     private String city;
     private String country;

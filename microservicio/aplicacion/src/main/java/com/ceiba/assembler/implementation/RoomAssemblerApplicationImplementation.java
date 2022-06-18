@@ -5,7 +5,7 @@ import com.ceiba.model.Room;
 import com.ceiba.assembler.RoomAssemblerApplication;
 import java.util.List;
 
-public class RoomAssemblerApplicationImplementation implements RoomAssemblerApplication
+public final class RoomAssemblerApplicationImplementation implements RoomAssemblerApplication
 {
     private static final RoomAssemblerApplication INSTANCE = new RoomAssemblerApplicationImplementation();
 

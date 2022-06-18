@@ -4,7 +4,7 @@ import com.ceiba.adapter.entity.HotelEntity;
 import com.ceiba.adapter.assembler.HotelAssemblerInfrastructure;
 import com.ceiba.model.Hotel;
 
-public class HotelAssemblerInfrastructureImplementation implements HotelAssemblerInfrastructure
+public final class HotelAssemblerInfrastructureImplementation implements HotelAssemblerInfrastructure
 {
     private static final HotelAssemblerInfrastructure INSTANCE = new HotelAssemblerInfrastructureImplementation();
 

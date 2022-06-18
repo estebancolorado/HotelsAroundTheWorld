@@ -5,7 +5,7 @@ import com.ceiba.model.Room;
 import com.ceiba.adapter.assembler.RoomAssemblerInfrastructure;
 import java.util.List;
 
-public class RoomAssemblerInfrastructureImplementation implements RoomAssemblerInfrastructure
+public final class RoomAssemblerInfrastructureImplementation implements RoomAssemblerInfrastructure
 {
     private static final RoomAssemblerInfrastructure INSTANCE = new RoomAssemblerInfrastructureImplementation();
 
