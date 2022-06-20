@@ -6,10 +6,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
-
 import javax.sql.DataSource;
 import java.io.IOException;
-
 
 @ComponentScan("com.ceiba")
 public class ApplicationMock
