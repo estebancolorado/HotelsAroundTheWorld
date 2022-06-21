@@ -86,9 +86,13 @@ class ReservationTest
         var country = "Estados Unidos de America";
         var destination = Destination.create(city, country, hotel);
 
-        var checkIn = FormatDate.getDate("10/07/2022");
-        var checkOut = FormatDate.getDate("10/07/2022");
+        var checkInEqual = FormatDate.getDate("10/07/2022");
+        var checkOutEqual = FormatDate.getDate("10/07/2022");
 
-        Assertions.assertEquals(Message.CHECKOUT_CANNOT_BE_LESS_THAN_OR_EQUAL_CHECKIN, Assertions.assertThrows(IllegalArgumentException.class, () -> Reservation.create(checkIn, checkOut, destination)).getMessage());
+        var checkInBefore = FormatDate.getDate("10/07/2022");
+        var checkOutBefore = FormatDate.getDate("09/07/2022");
+
+        Assertions.assertEquals(Message.CHECKOUT_CANNOT_BE_LESS_THAN_OR_EQUAL_CHECKIN, Assertions.assertThrows(IllegalArgumentException.class, () -> Reservation.create(checkInEqual, checkOutEqual, destination)).getMessage());
+        Assertions.assertEquals(Message.CHECKOUT_CANNOT_BE_LESS_THAN_OR_EQUAL_CHECKIN, Assertions.assertThrows(IllegalArgumentException.class, () -> Reservation.create(checkInBefore, checkOutBefore, destination)).getMessage());
     }
 }
