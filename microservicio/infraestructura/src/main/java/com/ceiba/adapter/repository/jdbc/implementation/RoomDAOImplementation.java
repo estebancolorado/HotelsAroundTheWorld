@@ -25,9 +25,6 @@ public class RoomDAOImplementation implements RoomDAO
     @SqlStatement(namespace = "room", value = "findAllRooms")
     private static String findAllSQL;
 
-    @SqlStatement(namespace = "room", value = "findRoomById")
-    private static String findByIdSQL;
-
     @SqlStatement(namespace = "room", value = "saveRoom")
     private static String saveSQL;
 
@@ -43,16 +40,6 @@ public class RoomDAOImplementation implements RoomDAO
         paramSource.getValues();
 
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(findAllSQL, paramSource, roomMapper);
-    }
-
-    @Override
-    public RoomEntity findById(Long id)
-    {
-        MapSqlParameterSource paramSource = new MapSqlParameterSource();
-
-        paramSource.addValue("id", id);
-
-        return EjecucionBaseDeDatos.obtenerUnObjetoONull(()-> this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(findByIdSQL,paramSource, roomMapper));
     }
 
     @Override

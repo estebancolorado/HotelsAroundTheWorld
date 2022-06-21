@@ -3,7 +3,11 @@ package com.ceiba.model;
 import com.ceiba.utilitarian.Message;
 import com.ceiba.validator.ValidateNumber;
 import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 public final class Hotel
@@ -44,7 +48,7 @@ public final class Hotel
             }
         });
 
-        this.rooms = rooms;
+        this.rooms = List.copyOf(rooms);
     }
 
     private int calculateNumberGuestsAllowed(int numberStars)
