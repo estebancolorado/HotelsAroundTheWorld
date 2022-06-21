@@ -1,6 +1,5 @@
 package com.ceiba.error;
 
-import com.ceiba.validator.ValidateObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -13,12 +12,15 @@ import java.util.concurrent.ConcurrentHashMap;
 @ControllerAdvice
 public class ErrorManager extends ResponseEntityExceptionHandler
 {
-    private static final Logger console = LoggerFactory.getLogger(ErrorManager.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ErrorManager.class);
     private static final ConcurrentHashMap<String, Integer> STATUS_CODES = new ConcurrentHashMap<>();
 
     public ErrorManager()
     {
-        STATUS_CODES.put(IllegalStateException.class.getSimpleName(), HttpStatus.CONFLICT.value());
+        STATUS_CODES.put(IllegalArgumentException.class.getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR.value());
+        STATUS_CODES.put(NullPointerException.class.getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR.value());
+        STATUS_CODES.put(IllegalStateException.class.getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR.value());
+        STATUS_CODES.put(RuntimeException.class.getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
 
     @ExceptionHandler(Exception.class)
@@ -28,13 +30,7 @@ public class ErrorManager extends ResponseEntityExceptionHandler
         String message = exception.getMessage();
         Integer code = STATUS_CODES.get(nameException);
 
-        if (ValidateObject.isNull(code))
-        {
-            console.error(nameException, exception);
-            Error error = new Error(nameException, exception.getMessage());
-            return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
+        LOG.error(nameException, exception);
         Error error = new Error(nameException, message);
         return new ResponseEntity<>(error, HttpStatus.valueOf(code));
     }

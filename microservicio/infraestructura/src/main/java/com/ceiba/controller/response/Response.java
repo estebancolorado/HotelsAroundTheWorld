@@ -1,6 +1,5 @@
 package com.ceiba.controller.response;
 
-import com.ceiba.validator.ValidateObject;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.ArrayList;
@@ -18,9 +17,6 @@ public class Response<T>
 
     public void addMessage(String message)
     {
-        if(!ValidateObject.isNull(message))
-        {
-            getMessages().add(message);
-        }
+        getMessages().add(message);
     }
 }
