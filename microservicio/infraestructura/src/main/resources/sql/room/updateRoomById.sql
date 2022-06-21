@@ -1,1 +1,0 @@
-UPDATE room SET number_guests = :number_guests WHERE id = :id;

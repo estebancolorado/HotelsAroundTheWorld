@@ -8,6 +8,5 @@ public interface RoomDAO
     List<RoomEntity> findAll(Long hotelId);
     RoomEntity findById(Long id);
     Long save(RoomEntity room, Long hotelId);
-    Long update(RoomEntity room);
     Long delete(Long id);
 }

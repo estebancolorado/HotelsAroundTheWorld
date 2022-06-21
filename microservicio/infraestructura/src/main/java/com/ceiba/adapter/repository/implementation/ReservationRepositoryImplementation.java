@@ -55,10 +55,7 @@ public class ReservationRepositoryImplementation implements ReservationRepositor
 
         var hotelId = hotelDAO.save(entity.getDestination().getHotel());
 
-        entity.getDestination().getHotel().getRooms().forEach(room ->
-        {
-            roomDAO.save(room, hotelId);
-        });
+        entity.getDestination().getHotel().getRooms().forEach(room -> roomDAO.save(room, hotelId));
 
         var destinationId = destinationDAO.save(entity.getDestination(), hotelId);
 
@@ -72,10 +69,7 @@ public class ReservationRepositoryImplementation implements ReservationRepositor
 
         reservationDAO.delete(reservation.getId());
         destinationDAO.delete(reservation.getDestination().getId());
-        reservation.getDestination().getHotel().getRooms().forEach(room ->
-        {
-            roomDAO.delete(room.getId());
-        });
+        reservation.getDestination().getHotel().getRooms().forEach(room -> roomDAO.delete(room.getId()));
         hotelDAO.delete(reservation.getDestination().getHotel().getId());
 
         return id;

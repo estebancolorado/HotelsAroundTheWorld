@@ -26,9 +26,6 @@ public class ReservationDAOImplementation implements ReservationDAO
     @SqlStatement(namespace = "reservation", value = "saveReservation")
     private static String saveSQL;
 
-    @SqlStatement(namespace = "reservation", value = "updateReservationById")
-    private static String updateSQL;
-
     @SqlStatement(namespace = "reservation", value = "deleteReservationById")
     private static String deleteSQL;
 
@@ -76,21 +73,6 @@ public class ReservationDAOImplementation implements ReservationDAO
         paramSource.addValue("destination", destinationId);
 
         return this.customNamedParameterJdbcTemplate.crear(paramSource, saveSQL);
-    }
-
-    @Override
-    public Long update(ReservationEntity reservation)
-    {
-        MapSqlParameterSource paramSource = new MapSqlParameterSource();
-
-        paramSource.addValue("checkin", reservation.getCheckIn());
-        paramSource.addValue("checkout", reservation.getCheckOut());
-        paramSource.addValue("price", reservation.getPrice());
-        paramSource.addValue("id", reservation.getId());
-
-        this.customNamedParameterJdbcTemplate.actualizar(paramSource, updateSQL);
-
-        return reservation.getId();
     }
 
     @Override

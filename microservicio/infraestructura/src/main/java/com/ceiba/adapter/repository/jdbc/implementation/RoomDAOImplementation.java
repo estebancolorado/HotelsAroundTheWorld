@@ -31,9 +31,6 @@ public class RoomDAOImplementation implements RoomDAO
     @SqlStatement(namespace = "room", value = "saveRoom")
     private static String saveSQL;
 
-    @SqlStatement(namespace = "room", value = "updateRoomById")
-    private static String updateSQL;
-
     @SqlStatement(namespace = "room", value = "deleteRoomById")
     private static String deleteSQL;
 
@@ -67,19 +64,6 @@ public class RoomDAOImplementation implements RoomDAO
         paramSource.addValue("hotel", hotelId);
 
         return this.customNamedParameterJdbcTemplate.crear(paramSource, saveSQL);
-    }
-
-    @Override
-    public Long update(RoomEntity room)
-    {
-        MapSqlParameterSource paramSource = new MapSqlParameterSource();
-
-        paramSource.addValue("number_guests", room.getNumberGuests());
-        paramSource.addValue("id", room.getId());
-
-        this.customNamedParameterJdbcTemplate.actualizar(paramSource, updateSQL);
-
-        return room.getId();
     }
 
     @Override

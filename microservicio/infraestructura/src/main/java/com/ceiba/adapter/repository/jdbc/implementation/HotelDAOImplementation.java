@@ -8,7 +8,6 @@ import com.ceiba.infraestructura.jdbc.EjecucionBaseDeDatos;
 import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
-import java.util.List;
 
 @Repository
 public class HotelDAOImplementation implements HotelDAO
@@ -21,30 +20,13 @@ public class HotelDAOImplementation implements HotelDAO
         this.hotelMapper = hotelMapper;
     }
 
-    @SqlStatement(namespace = "hotel", value = "findAllHotels")
-    private static String findAllSQL;
-
     @SqlStatement(namespace = "hotel", value = "findHotelById")
     private static String findByIdSQL;
 
     @SqlStatement(namespace = "hotel", value = "saveHotel")
     private static String saveSQL;
-
-    @SqlStatement(namespace = "hotel", value = "updateHotelById")
-    private static String updateSQL;
-
     @SqlStatement(namespace = "hotel", value = "deleteHotelById")
     private static String deleteSQL;
-
-    @Override
-    public List<HotelEntity> findAll()
-    {
-        MapSqlParameterSource paramSource = new MapSqlParameterSource();
-
-        paramSource.getValues();
-
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(findAllSQL, paramSource, hotelMapper);
-    }
 
     @Override
     public HotelEntity findById(Long id)
@@ -64,19 +46,6 @@ public class HotelDAOImplementation implements HotelDAO
         paramSource.addValue("number_stars", hotel.getNumberStars());
 
         return this.customNamedParameterJdbcTemplate.crear(paramSource, saveSQL);
-    }
-
-    @Override
-    public Long update(HotelEntity hotel)
-    {
-        MapSqlParameterSource paramSource = new MapSqlParameterSource();
-
-        paramSource.addValue("number_stars", hotel.getNumberStars());
-        paramSource.addValue("id", hotel.getId());
-
-        this.customNamedParameterJdbcTemplate.actualizar(paramSource, updateSQL);
-
-        return hotel.getId();
     }
 
     @Override

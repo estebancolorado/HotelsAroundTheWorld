@@ -4,7 +4,6 @@ import com.ceiba.dto.ReservationSummaryDTO;
 import com.ceiba.port.ReservationRepository;
 import com.ceiba.utilitarian.Message;
 import com.ceiba.validator.ValidateObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

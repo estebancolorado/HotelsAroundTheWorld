@@ -8,6 +8,5 @@ public interface ReservationDAO
     List<ReservationEntity> findAll();
     ReservationEntity findById(Long id);
     Long save(ReservationEntity reservation, Long destinationId);
-    Long update(ReservationEntity reservation);
     Long delete(Long id);
 }

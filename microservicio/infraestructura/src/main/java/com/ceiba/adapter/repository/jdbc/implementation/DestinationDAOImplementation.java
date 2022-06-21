@@ -9,25 +9,17 @@ import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public class DestinationDAOImplementation implements DestinationDAO
 {
     private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
     private final DestinationMapper destinationMapper;
 
-    @SqlStatement(namespace = "destination", value = "findAllDestinations")
-    private static String findAllSQL;
-
     @SqlStatement(namespace = "destination", value = "findDestinationById")
     private static String findByIdSQL;
 
     @SqlStatement(namespace = "destination", value = "saveDestination")
     private static String saveSQL;
-
-    @SqlStatement(namespace = "destination", value = "updateDestinationById")
-    private static String updateSQL;
 
     @SqlStatement(namespace = "destination", value = "deleteDestinationById")
     private static String deleteSQL;
@@ -36,16 +28,6 @@ public class DestinationDAOImplementation implements DestinationDAO
     {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
         this.destinationMapper = destinationMapper;
-    }
-
-    @Override
-    public List<DestinationEntity> findAll()
-    {
-        MapSqlParameterSource paramSource = new MapSqlParameterSource();
-
-        paramSource.getValues();
-
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(findAllSQL, paramSource, destinationMapper);
     }
 
     @Override
@@ -68,20 +50,6 @@ public class DestinationDAOImplementation implements DestinationDAO
         paramSource.addValue("hotel", hotelId);
 
         return this.customNamedParameterJdbcTemplate.crear(paramSource, saveSQL);
-    }
-
-    @Override
-    public Long update(DestinationEntity destination)
-    {
-        MapSqlParameterSource paramSource = new MapSqlParameterSource();
-
-        paramSource.addValue("city", destination.getCity());
-        paramSource.addValue("country", destination.getCountry());
-        paramSource.addValue("id", destination.getId());
-
-        this.customNamedParameterJdbcTemplate.actualizar(paramSource, updateSQL);
-
-        return destination.getId();
     }
 
     @Override
