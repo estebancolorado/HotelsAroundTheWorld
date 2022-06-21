@@ -1,7 +1,7 @@
 package com.ceiba.service;
 
 import com.ceiba.model.Reservation;
-import com.ceiba.port.ReservationRepository;
+import com.ceiba.port.ReservationRepositoryCommand;
 import com.ceiba.testdatabuilder.ReservationTestDataBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ class ServiceSaveReservationTest
     {
         var reservation = new ReservationTestDataBuilder().build();
 
-        var repository = Mockito.mock(ReservationRepository.class);
+        var repository = Mockito.mock(ReservationRepositoryCommand.class);
         var calculatePrice = Mockito.mock(ServiceCalculatePrice.class);
 
         var service = new ServiceSaveReservation(calculatePrice, repository);

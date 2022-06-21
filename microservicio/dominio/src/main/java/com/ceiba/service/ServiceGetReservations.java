@@ -1,7 +1,7 @@
 package com.ceiba.service;
 
 import com.ceiba.dto.ReservationSummaryDTO;
-import com.ceiba.port.ReservationRepository;
+import com.ceiba.port.ReservationRepositoryQuery;
 import com.ceiba.utilitarian.Message;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -11,17 +11,17 @@ public class ServiceGetReservations
 {
     private final ServiceCalculatePrice serviceCalculatePrice;
 
-    private final ReservationRepository reservationRepository;
+    private final ReservationRepositoryQuery reservationRepositoryQuery;
 
-    public ServiceGetReservations(ServiceCalculatePrice serviceCalculatePrice, ReservationRepository reservationRepository)
+    public ServiceGetReservations(ServiceCalculatePrice serviceCalculatePrice, ReservationRepositoryQuery reservationRepositoryQuery)
     {
         this.serviceCalculatePrice = serviceCalculatePrice;
-        this.reservationRepository = reservationRepository;
+        this.reservationRepositoryQuery = reservationRepositoryQuery;
     }
 
     public List<ReservationSummaryDTO> implement()
     {
-        var reservations = this.reservationRepository.getAll();
+        var reservations = this.reservationRepositoryQuery.getAll();
 
         if(reservations.isEmpty())
         {

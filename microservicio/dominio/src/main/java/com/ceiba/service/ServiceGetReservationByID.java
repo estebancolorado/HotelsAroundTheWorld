@@ -1,7 +1,8 @@
 package com.ceiba.service;
 
 import com.ceiba.dto.ReservationSummaryDTO;
-import com.ceiba.port.ReservationRepository;
+import com.ceiba.port.ReservationRepositoryCommand;
+import com.ceiba.port.ReservationRepositoryQuery;
 import com.ceiba.utilitarian.Message;
 import com.ceiba.validator.ValidateObject;
 import org.springframework.stereotype.Service;
@@ -10,18 +11,17 @@ import org.springframework.stereotype.Service;
 public class ServiceGetReservationByID
 {
     private final ServiceCalculatePrice serviceCalculatePrice;
+    private final ReservationRepositoryQuery reservationRepositoryQuery;
 
-    private final ReservationRepository reservationRepository;
-
-    public ServiceGetReservationByID(ServiceCalculatePrice serviceCalculatePrice, ReservationRepository reservationRepository)
+    public ServiceGetReservationByID(ServiceCalculatePrice serviceCalculatePrice, ReservationRepositoryQuery reservationRepositoryQuery)
     {
         this.serviceCalculatePrice = serviceCalculatePrice;
-        this.reservationRepository = reservationRepository;
+        this.reservationRepositoryQuery = reservationRepositoryQuery;
     }
 
     public ReservationSummaryDTO implement(Long id)
     {
-        var reservation = this.reservationRepository.getById(id);
+        var reservation = this.reservationRepositoryQuery.getById(id);
 
         if(ValidateObject.isNull(reservation))
         {

@@ -4,19 +4,15 @@ import com.ceiba.adapter.repository.jdbc.DestinationDAO;
 import com.ceiba.adapter.repository.jdbc.HotelDAO;
 import com.ceiba.adapter.repository.jdbc.ReservationDAO;
 import com.ceiba.adapter.repository.jdbc.RoomDAO;
-import com.ceiba.dto.ReservationSummaryDTO;
 import com.ceiba.model.Reservation;
-import com.ceiba.port.ReservationRepository;
-import com.ceiba.validator.ValidateObject;
+import com.ceiba.port.ReservationRepositoryCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 import static com.ceiba.adapter.assembler.implementation.ReservationAssemblerInfrastructureImplementation.getReservationAssembler;
 
 @Repository
-public class ReservationRepositoryImplementation implements ReservationRepository
+public class ReservationRepositoryCommandImplementation implements ReservationRepositoryCommand
 {
     @Autowired
     HotelDAO hotelDAO;
@@ -26,25 +22,6 @@ public class ReservationRepositoryImplementation implements ReservationRepositor
     DestinationDAO destinationDAO;
     @Autowired
     ReservationDAO reservationDAO;
-
-    @Override
-    public List<ReservationSummaryDTO> getAll()
-    {
-        return this.reservationDAO.findAll().stream().map(getReservationAssembler()::assembleDTOFromEntity).toList();
-    }
-
-    @Override
-    public ReservationSummaryDTO getById(Long id)
-    {
-        var entity = this.reservationDAO.findById(id);
-
-        if(ValidateObject.isNull(entity))
-        {
-            return null;
-        }
-
-        return getReservationAssembler().assembleDTOFromEntity(entity);
-    }
 
     @Override
     public Long save(Reservation reservation, double price)
