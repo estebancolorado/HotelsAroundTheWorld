@@ -2,8 +2,10 @@ package com.ceiba.controller;
 
 import com.ceiba.ApplicationMock;
 import com.ceiba.controller.response.Response;
+import com.ceiba.dto.DestinationDTO;
+import com.ceiba.dto.HotelDTO;
 import com.ceiba.dto.ReservationDTO;
-import com.ceiba.port.ReservationRepository;
+import com.ceiba.dto.RoomDTO;
 import com.ceiba.testdatabuilder.ReservationDTOTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
@@ -18,6 +20,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import java.util.List;
 import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -56,6 +59,44 @@ class ReservationControllerTest
 
         var message = response.getMessages().get(0);
         Assertions.assertEquals("The reservation was saved successful", message);
+    }
+
+    @Test
+    @DisplayName("It must throw an error when the request is wrong")
+    void postRequestFailed() throws Exception
+    {
+        var room = new RoomDTO(3);
+        var hotel = new HotelDTO(3, List.of(room));
+        var destination = new DestinationDTO("Medellin", "colombia", hotel);
+        var reservation = new ReservationDTO("2022/07/10", "2022/07/15", destination);
+
+        createBadDates(reservation);
+        createBadNumberOfGuests(reservation);
+    }
+
+    private void createBadDates(ReservationDTO dto) throws Exception
+    {
+        dto.setCheckIn("2022/07/10");
+        dto.setCheckOut("2022/07/15");
+
+        mocMvc.perform(MockMvcRequestBuilders.post("/api/reservations")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(dto)))
+                .andExpect(status().is5xxServerError())
+                .andExpect(jsonPath("$.nameException", is("IllegalArgumentException")))
+                .andExpect(jsonPath("$.message", is("Date has not the pattern dd/mm/yyyy")));
+    }
+
+    private void createBadNumberOfGuests(ReservationDTO dto) throws Exception
+    {
+        dto.getDestination().getHotel().getRooms().get(0).setNumberGuests(7);
+
+        mocMvc.perform(MockMvcRequestBuilders.post("/api/reservations")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto)))
+                .andExpect(status().is5xxServerError())
+                .andExpect(jsonPath("$.nameException", is("IllegalArgumentException")))
+                .andExpect(jsonPath("$.message", is("Number of guests cannot be greater than 6")));
     }
 
     @Test
