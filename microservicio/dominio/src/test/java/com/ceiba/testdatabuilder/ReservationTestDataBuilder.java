@@ -2,7 +2,7 @@ package com.ceiba.testdatabuilder;
 
 
 import com.ceiba.formatter.FormatDate;
-import com.ceiba.model.Reservation;
+import com.ceiba.reservation.model.entity.Reservation;
 
 import java.time.LocalDate;
 

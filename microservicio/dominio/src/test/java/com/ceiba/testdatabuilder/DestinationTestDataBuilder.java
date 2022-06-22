@@ -1,7 +1,7 @@
 package com.ceiba.testdatabuilder;
 
 
-import com.ceiba.model.Destination;
+import com.ceiba.reservation.model.entity.Destination;
 
 public class DestinationTestDataBuilder
 {

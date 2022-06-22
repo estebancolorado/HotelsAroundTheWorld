@@ -1,5 +1,6 @@
 package com.ceiba.service;
 
+import com.ceiba.reservation.service.ServiceCalculatePrice;
 import com.ceiba.testdatabuilder.ReservationTestDataBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

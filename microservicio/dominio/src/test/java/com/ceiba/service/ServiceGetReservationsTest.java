@@ -1,8 +1,9 @@
 package com.ceiba.service;
 
-import com.ceiba.dto.ReservationSummaryDTO;
-import com.ceiba.port.ReservationRepositoryCommand;
-import com.ceiba.port.ReservationRepositoryQuery;
+import com.ceiba.reservation.model.dto.ReservationSummaryDTO;
+import com.ceiba.reservation.port.dao.ReservationQuery;
+import com.ceiba.reservation.service.ServiceCalculatePrice;
+import com.ceiba.reservation.service.ServiceGetReservations;
 import com.ceiba.utilitarian.Message;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,7 @@ class ServiceGetReservationsTest
     void validateSuccessfulConsultation()
     {
         var reservations = List.of( new ReservationSummaryDTO());
-        var repository = Mockito.mock(ReservationRepositoryQuery.class);
+        var repository = Mockito.mock(ReservationQuery.class);
         var calculatePrice = Mockito.mock(ServiceCalculatePrice.class);
 
         var service = new ServiceGetReservations(calculatePrice, repository);
@@ -36,7 +37,7 @@ class ServiceGetReservationsTest
     {
         List<ReservationSummaryDTO> reservations = new ArrayList<>();
 
-        var repository = Mockito.mock(ReservationRepositoryQuery.class);
+        var repository = Mockito.mock(ReservationQuery.class);
         var calculatePrice = Mockito.mock(ServiceCalculatePrice.class);
 
         var service = new ServiceGetReservations(calculatePrice, repository);

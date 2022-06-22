@@ -1,8 +1,9 @@
 package com.ceiba.service;
 
-import com.ceiba.dto.ReservationSummaryDTO;
-import com.ceiba.port.ReservationRepositoryCommand;
-import com.ceiba.port.ReservationRepositoryQuery;
+import com.ceiba.reservation.model.dto.ReservationSummaryDTO;
+import com.ceiba.reservation.port.dao.ReservationQuery;
+import com.ceiba.reservation.service.ServiceCalculatePrice;
+import com.ceiba.reservation.service.ServiceGetReservationByID;
 import com.ceiba.utilitarian.Message;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ class ServiceGetReservationByIDTest
     {
         ReservationSummaryDTO reservation = new ReservationSummaryDTO();
 
-        var repositoryQuery = Mockito.mock(ReservationRepositoryQuery.class);
+        var repositoryQuery = Mockito.mock(ReservationQuery.class);
         var calculatePrice = Mockito.mock(ServiceCalculatePrice.class);
 
         var service = new ServiceGetReservationByID(calculatePrice, repositoryQuery);
@@ -33,7 +34,7 @@ class ServiceGetReservationByIDTest
     void returnErrorIfDoesNotExist()
     {
         ReservationSummaryDTO reservation = new ReservationSummaryDTO();
-        var repositoryQuery = Mockito.mock(ReservationRepositoryQuery.class);
+        var repositoryQuery = Mockito.mock(ReservationQuery.class);
         var calculatePrice = Mockito.mock(ServiceCalculatePrice.class);
 
         var service = new ServiceGetReservationByID(calculatePrice, repositoryQuery);

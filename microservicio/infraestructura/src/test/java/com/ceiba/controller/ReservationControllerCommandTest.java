@@ -1,11 +1,12 @@
 package com.ceiba.controller;
 
 import com.ceiba.ApplicationMock;
-import com.ceiba.controller.response.Response;
-import com.ceiba.dto.DestinationDTO;
-import com.ceiba.dto.HotelDTO;
-import com.ceiba.dto.ReservationDTO;
-import com.ceiba.dto.RoomDTO;
+import com.ceiba.reservation.controller.ReservationControllerCommand;
+import com.ceiba.reservation.controller.response.Response;
+import com.ceiba.reservation.command.DestinationCommand;
+import com.ceiba.reservation.command.HotelCommand;
+import com.ceiba.reservation.command.ReservationCommand;
+import com.ceiba.reservation.command.RoomCommand;
 import com.ceiba.testdatabuilder.ReservationDTOTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
@@ -46,7 +47,7 @@ class ReservationControllerCommandTest
         create(dto);
     }
 
-    private void create(ReservationDTO dto) throws Exception
+    private void create(ReservationCommand dto) throws Exception
     {
         var result = mocMvc.perform(MockMvcRequestBuilders.post("/api/reservations")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -65,16 +66,16 @@ class ReservationControllerCommandTest
     @DisplayName("It must throw an error when the request is wrong")
     void postRequestFailed() throws Exception
     {
-        var room = new RoomDTO(3);
-        var hotel = new HotelDTO(3, List.of(room));
-        var destination = new DestinationDTO("Medellin", "colombia", hotel);
-        var reservation = new ReservationDTO("2022/07/10", "2022/07/15", destination);
+        var room = new RoomCommand(3);
+        var hotel = new HotelCommand(3, List.of(room));
+        var destination = new DestinationCommand("Medellin", "colombia", hotel);
+        var reservation = new ReservationCommand("2022/07/10", "2022/07/15", destination);
 
         createBadDates(reservation);
         createBadNumberOfGuests(reservation);
     }
 
-    private void createBadDates(ReservationDTO dto) throws Exception
+    private void createBadDates(ReservationCommand dto) throws Exception
     {
         dto.setCheckIn("2022/07/10");
         dto.setCheckOut("2022/07/15");
@@ -87,7 +88,7 @@ class ReservationControllerCommandTest
                 .andExpect(jsonPath("$.message", is("Date has not the pattern dd/mm/yyyy")));
     }
 
-    private void createBadNumberOfGuests(ReservationDTO dto) throws Exception
+    private void createBadNumberOfGuests(ReservationCommand dto) throws Exception
     {
         dto.getDestination().getHotel().getRooms().get(0).setNumberGuests(7);
 

@@ -1,6 +1,6 @@
 package com.ceiba.testdatabuilder;
 
-import com.ceiba.dto.RoomDTO;
+import com.ceiba.reservation.command.RoomCommand;
 
 public class RoomDTOTestDataBuilder
 {
@@ -11,8 +11,8 @@ public class RoomDTOTestDataBuilder
         this.numberGuests = 3;
     }
 
-    public RoomDTO build()
+    public RoomCommand build()
     {
-        return new RoomDTO(numberGuests);
+        return new RoomCommand(numberGuests);
     }
 }

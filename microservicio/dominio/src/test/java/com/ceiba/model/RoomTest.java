@@ -1,5 +1,6 @@
 package com.ceiba.model;
 
+import com.ceiba.reservation.model.entity.Room;
 import com.ceiba.utilitarian.Message;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -1,8 +1,9 @@
 package com.ceiba.service;
 
-import com.ceiba.dto.ReservationSummaryDTO;
-import com.ceiba.port.ReservationRepositoryCommand;
-import com.ceiba.port.ReservationRepositoryQuery;
+import com.ceiba.reservation.model.dto.ReservationSummaryDTO;
+import com.ceiba.reservation.port.repository.ReservationRepository;
+import com.ceiba.reservation.port.dao.ReservationQuery;
+import com.ceiba.reservation.service.ServiceDeleteReservation;
 import com.ceiba.utilitarian.Message;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,8 +16,8 @@ class ServiceDeleteReservationTest
     {
         ReservationSummaryDTO reservation = new ReservationSummaryDTO();
 
-        var repositoryCommand = Mockito.mock(ReservationRepositoryCommand.class);
-        var repositoryQuery = Mockito.mock(ReservationRepositoryQuery.class);
+        var repositoryCommand = Mockito.mock(ReservationRepository.class);
+        var repositoryQuery = Mockito.mock(ReservationQuery.class);
 
         var service = new ServiceDeleteReservation(repositoryCommand, repositoryQuery);
 
@@ -32,8 +33,8 @@ class ServiceDeleteReservationTest
     @Test
     void returnErrorIfDoesNotExist()
     {
-        var repositoryCommand = Mockito.mock(ReservationRepositoryCommand.class);
-        var repositoryQuery = Mockito.mock(ReservationRepositoryQuery.class);
+        var repositoryCommand = Mockito.mock(ReservationRepository.class);
+        var repositoryQuery = Mockito.mock(ReservationQuery.class);
 
         var service = new ServiceDeleteReservation(repositoryCommand, repositoryQuery);
 

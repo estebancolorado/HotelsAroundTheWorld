@@ -1,6 +1,6 @@
 package com.ceiba.testdatabuilder;
 
-import com.ceiba.model.Room;
+import com.ceiba.reservation.model.entity.Room;
 
 public class RoomTestDataBuilder
 {

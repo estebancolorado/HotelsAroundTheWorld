@@ -1,6 +1,6 @@
 package com.ceiba.testdatabuilder;
 
-import com.ceiba.dto.ReservationDTO;
+import com.ceiba.reservation.command.ReservationCommand;
 
 public class ReservationDTOTestDataBuilder
 {
@@ -15,8 +15,8 @@ public class ReservationDTOTestDataBuilder
         this.destination = new DestinationDTOTestDataBuilder();
     }
 
-    public ReservationDTO build()
+    public ReservationCommand build()
     {
-        return new ReservationDTO(checkIn, checkOut, destination.build());
+        return new ReservationCommand(checkIn, checkOut, destination.build());
     }
 }

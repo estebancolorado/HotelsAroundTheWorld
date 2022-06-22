@@ -1,6 +1,7 @@
 package com.ceiba.controller;
 
 import com.ceiba.ApplicationMock;
+import com.ceiba.reservation.controller.ReservationControllerQuery;
 import com.ceiba.testdatabuilder.ReservationDTOTestDataBuilder;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

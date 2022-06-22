@@ -1,6 +1,6 @@
 package com.ceiba.testdatabuilder;
 
-import com.ceiba.model.Hotel;
+import com.ceiba.reservation.model.entity.Hotel;
 import java.util.List;
 
 public class HotelTestDataBuilder
