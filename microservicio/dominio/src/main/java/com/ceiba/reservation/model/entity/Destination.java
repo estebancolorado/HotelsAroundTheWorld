@@ -1,5 +1,6 @@
 package com.ceiba.reservation.model.entity;
 
+import com.ceiba.utilitarian.Constant;
 import com.ceiba.utilitarian.Message;
 import com.ceiba.validator.ValidateString;
 import lombok.Getter;
@@ -30,7 +31,7 @@ public final class Destination
             throw new IllegalArgumentException(Message.CITY_CANNOT_BE_EMPTY);
         }
 
-        if(ValidateString.isLengthInvalid(city, 1, 89))
+        if(ValidateString.isLengthInvalid(city, Constant.MINIMUM_LENGTH_OF_CITY, Constant.MAXIMUM_LENGTH_OF_CITY))
         {
             throw new IllegalArgumentException(Message.INVALID_CITY_LENGTH);
         }
@@ -45,7 +46,7 @@ public final class Destination
             throw new IllegalArgumentException(Message.COUNTRY_CANNOT_BE_EMPTY);
         }
 
-        if(ValidateString.isLengthInvalid(country, 1, 48))
+        if(ValidateString.isLengthInvalid(country, Constant.MINIMUM_LENGTH_OF_COUNTRY, Constant.MAXIMUM_LENGTH_OF_COUNTRY))
         {
             throw new IllegalArgumentException(Message.INVALID_COUNTRY_LENGTH);
         }

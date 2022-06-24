@@ -1,5 +1,6 @@
 package com.ceiba.reservation.model.entity;
 
+import com.ceiba.utilitarian.Constant;
 import com.ceiba.utilitarian.Message;
 import com.ceiba.validator.ValidateNumber;
 import lombok.Getter;
@@ -24,7 +25,7 @@ public final class Hotel
 
     private void setNumberStars(int numberStars)
     {
-        if(!ValidateNumber.isNumberBetween(numberStars, 1, 5))
+        if(!ValidateNumber.isNumberBetween(numberStars, Constant.LOWER_LIMIT_OF_STARS, Constant.UPPER_LIMIT_OF_STARS))
         {
             throw new IllegalArgumentException(Message.NUMBER_OF_STARS_INVALID);
         }
@@ -51,21 +52,21 @@ public final class Hotel
     {
         if(numberStars == 1)
         {
-            return 4;
+            return Constant.MAXIMUM_LENGTH_OF_GUESTS_WITH_ONE_STAR;
         }
         else if(numberStars == 2)
         {
-            return 5;
+            return Constant.MAXIMUM_LENGTH_OF_GUESTS_WITH_TWO_STAR;
         }
         else if(numberStars == 3)
         {
-            return 6;
+            return Constant.MAXIMUM_LENGTH_OF_GUESTS_WITH_THREE_STAR;
         }
         else if(numberStars == 4)
         {
-            return 8;
+            return Constant.MAXIMUM_LENGTH_OF_GUESTS_WITH_FOUR_STAR;
         }
 
-        return 10;
+        return Constant.MAXIMUM_LENGTH_OF_GUESTS_WITH_FIVE_STAR;
     }
 }

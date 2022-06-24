@@ -1,6 +1,7 @@
 package com.ceiba.reservation.model.entity;
 
 import com.ceiba.formatter.FormatDate;
+import com.ceiba.utilitarian.Constant;
 import com.ceiba.utilitarian.Message;
 import com.ceiba.validator.ValidateString;
 import lombok.Getter;
@@ -58,13 +59,13 @@ public final class Reservation
 
     public double calculatePrice()
     {
-        double finalPrice = 100.0;
+        double finalPrice = Constant.INITIAL_PRICE;
 
         if(this.destination.getHotel().getNumberStars() > 1)
         {
             for(int i = 0; i < this.destination.getHotel().getNumberStars() - 1; i++)
             {
-                finalPrice = finalPrice + (finalPrice * 0.30);
+                finalPrice = finalPrice + (finalPrice * Constant.PERCENTAGE_REGARDING_THE_NUMBER_OF_STARS);
             }
         }
 
@@ -72,7 +73,7 @@ public final class Reservation
         {
             for(int i = 0; i < this.destination.getHotel().getRooms().size() - 1; i++)
             {
-                finalPrice = finalPrice + (finalPrice * 0.20);
+                finalPrice = finalPrice + (finalPrice * Constant.PERCENTAGE_REGARDING_THE_NUMBER_OF_GUESTS);
             }
         }
 
