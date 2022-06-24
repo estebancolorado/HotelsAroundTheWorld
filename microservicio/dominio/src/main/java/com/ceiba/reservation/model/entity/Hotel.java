@@ -3,7 +3,6 @@ package com.ceiba.reservation.model.entity;
 import com.ceiba.utilitarian.Message;
 import com.ceiba.validator.ValidateNumber;
 import lombok.Getter;
-
 import java.util.List;
 
 @Getter

@@ -36,14 +36,12 @@ class ReservationControllerQueryTest
         mocMvc.perform(MockMvcRequestBuilders.get("/api/reservations")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.status", is("SUCCESSFUL")))
-                .andExpect(jsonPath("$.messages[0]", is("The reservations was consulted successful")))
-                .andExpect(jsonPath("$.data[0].checkIn", is(dto.getCheckIn())))
-                .andExpect(jsonPath("$.data[0].checkOut", is(dto.getCheckOut())))
-                .andExpect(jsonPath("$.data[0].destination.city", is(dto.getDestination().getCity())))
-                .andExpect(jsonPath("$.data[0].destination.country", is(dto.getDestination().getCountry())))
-                .andExpect(jsonPath("$.data[0].destination.hotel.numberStars", is(dto.getDestination().getHotel().getNumberStars())))
-                .andExpect(jsonPath("$.data[0].destination.hotel.rooms[0].numberGuests", is(dto.getDestination().getHotel().getRooms().get(0).getNumberGuests())));
+                .andExpect(jsonPath("$[0].checkIn", is(dto.getCheckIn())))
+                .andExpect(jsonPath("$[0].checkOut", is(dto.getCheckOut())))
+                .andExpect(jsonPath("$[0].destination.city", is(dto.getDestination().getCity())))
+                .andExpect(jsonPath("$[0].destination.country", is(dto.getDestination().getCountry())))
+                .andExpect(jsonPath("$[0].destination.hotel.numberStars", is(dto.getDestination().getHotel().getNumberStars())))
+                .andExpect(jsonPath("$[0].destination.hotel.rooms[0].numberGuests", is(dto.getDestination().getHotel().getRooms().get(0).getNumberGuests())));
     }
 
     @Test
@@ -60,8 +58,8 @@ class ReservationControllerQueryTest
         mocMvc.perform(MockMvcRequestBuilders.get("/api/reservations")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is5xxServerError())
-                .andExpect(jsonPath("$.nameException", is("IllegalArgumentException")))
-                .andExpect(jsonPath("$.message", is("There is no reservations on app ")));
+                .andExpect(jsonPath("$.nombreExcepcion", is("IllegalArgumentException")))
+                .andExpect(jsonPath("$.mensaje", is("There is no reservations on app ")));
     }
 
     @Test
@@ -74,14 +72,12 @@ class ReservationControllerQueryTest
         mocMvc.perform(MockMvcRequestBuilders.get("/api/reservations/" + id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.status", is("SUCCESSFUL")))
-                .andExpect(jsonPath("$.messages[0]", is("The reservation with the id " + id + " was consulted successful")))
-                .andExpect(jsonPath("$.data[0].checkIn", is(dto.getCheckIn())))
-                .andExpect(jsonPath("$.data[0].checkOut", is(dto.getCheckOut())))
-                .andExpect(jsonPath("$.data[0].destination.city", is(dto.getDestination().getCity())))
-                .andExpect(jsonPath("$.data[0].destination.country", is(dto.getDestination().getCountry())))
-                .andExpect(jsonPath("$.data[0].destination.hotel.numberStars", is(dto.getDestination().getHotel().getNumberStars())))
-                .andExpect(jsonPath("$.data[0].destination.hotel.rooms[0].numberGuests", is(dto.getDestination().getHotel().getRooms().get(0).getNumberGuests())));
+                .andExpect(jsonPath("$.checkIn", is(dto.getCheckIn())))
+                .andExpect(jsonPath("$.checkOut", is(dto.getCheckOut())))
+                .andExpect(jsonPath("$.destination.city", is(dto.getDestination().getCity())))
+                .andExpect(jsonPath("$.destination.country", is(dto.getDestination().getCountry())))
+                .andExpect(jsonPath("$.destination.hotel.numberStars", is(dto.getDestination().getHotel().getNumberStars())))
+                .andExpect(jsonPath("$.destination.hotel.rooms[0].numberGuests", is(dto.getDestination().getHotel().getRooms().get(0).getNumberGuests())));
     }
 
     @Test
@@ -93,7 +89,7 @@ class ReservationControllerQueryTest
         mocMvc.perform(MockMvcRequestBuilders.get("/api/reservations/" + id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is5xxServerError())
-                .andExpect(jsonPath("$.nameException", is("IllegalArgumentException")))
-                .andExpect(jsonPath("$.message", is("There is no reservation on id " + id)));
+                .andExpect(jsonPath("$.nombreExcepcion", is("IllegalArgumentException")))
+                .andExpect(jsonPath("$.mensaje", is("There is no reservation on id " + id)));
     }
 }

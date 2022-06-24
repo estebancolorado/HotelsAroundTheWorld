@@ -15,7 +15,6 @@ public class ReservationSummaryDTO
     private Long id;
     private String checkIn;
     private String checkOut;
-    private double dollarPrice;
-    private double pesosPrice;
+    private double price;
     private Destination destination;
 }

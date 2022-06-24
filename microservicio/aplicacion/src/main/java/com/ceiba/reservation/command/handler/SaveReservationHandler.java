@@ -1,20 +1,26 @@
 package com.ceiba.reservation.command.handler;
 
+import com.ceiba.ComandoRespuesta;
+import com.ceiba.manejador.ManejadorComandoRespuesta;
 import com.ceiba.reservation.command.ReservationCommand;
-import com.ceiba.reservation.model.dto.ReservationSummaryDTO;
+import com.ceiba.reservation.command.factory.ReservationFactory;
 import com.ceiba.reservation.service.ServiceSaveReservation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import static com.ceiba.reservation.command.assembler.implementation.ReservationAssemblerApplicationImplementation.getReservationAssembler;
 
 @Component
-public class SaveReservationHandler
+public class SaveReservationHandler implements ManejadorComandoRespuesta<ReservationCommand, ComandoRespuesta<Long>>
 {
-    @Autowired
-    ServiceSaveReservation serviceSaveReservation;
+    private final ReservationFactory reservationFactory;
+    private final ServiceSaveReservation serviceSaveReservation;
 
-    public ReservationSummaryDTO implement(ReservationCommand reservation)
+    public SaveReservationHandler(ReservationFactory reservationFactory, ServiceSaveReservation serviceSaveReservation)
     {
-        return this.serviceSaveReservation.implement(getReservationAssembler().assembleDomainFromCommand(reservation));
+        this.reservationFactory = reservationFactory;
+        this.serviceSaveReservation = serviceSaveReservation;
+    }
+    @Override
+    public ComandoRespuesta<Long> ejecutar(ReservationCommand comando)
+    {
+        return new ComandoRespuesta<>(serviceSaveReservation.implement(reservationFactory.build(comando)));
     }
 }

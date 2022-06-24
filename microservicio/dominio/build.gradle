@@ -30,7 +30,6 @@ dependencies {
 	testImplementation project.ext.mockitojupiter
 	testImplementation project(':comun:comun-test')
 	implementation project(':comun:comun-dominio')
-	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.7.0'
 
 	compileOnly project.ext.lombok
 	annotationProcessor project.ext.lombok

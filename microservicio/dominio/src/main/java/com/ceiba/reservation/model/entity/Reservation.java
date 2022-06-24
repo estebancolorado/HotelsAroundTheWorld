@@ -5,6 +5,7 @@ import com.ceiba.utilitarian.Message;
 import com.ceiba.validator.ValidateString;
 import lombok.Getter;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 @Getter
 public final class Reservation
@@ -53,5 +54,37 @@ public final class Reservation
         }
 
         this.checkOut = checkOut;
+    }
+
+    public double calculatePrice()
+    {
+        double finalPrice = 100.0;
+
+        if(this.destination.getHotel().getNumberStars() > 1)
+        {
+            for(int i = 0; i < this.destination.getHotel().getNumberStars() - 1; i++)
+            {
+                finalPrice = finalPrice + (finalPrice * 0.30);
+            }
+        }
+
+        if(this.destination.getHotel().getRooms().size() > 1)
+        {
+            for(int i = 0; i < this.destination.getHotel().getRooms().size() - 1; i++)
+            {
+                finalPrice = finalPrice + (finalPrice * 0.20);
+            }
+        }
+
+        for(int i = 0; i < this.destination.getHotel().getRooms().size(); i++)
+        {
+            finalPrice = finalPrice * this.destination.getHotel().getRooms().get(0).getNumberGuests();
+        }
+
+        long days = ChronoUnit.DAYS.between(this.checkIn, this.checkOut);
+
+        finalPrice = finalPrice * days;
+
+        return Math.round(finalPrice*100.0)/100.0;
     }
 }

@@ -5,6 +5,7 @@ import com.ceiba.reservation.model.entity.Destination;
 import com.ceiba.reservation.model.entity.Hotel;
 import com.ceiba.reservation.model.entity.Reservation;
 import com.ceiba.reservation.model.entity.Room;
+import com.ceiba.testdatabuilder.ReservationTestDataBuilder;
 import com.ceiba.utilitarian.Message;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -98,5 +99,13 @@ class ReservationTest
 
         Assertions.assertEquals(Message.CHECKOUT_CANNOT_BE_LESS_THAN_OR_EQUAL_CHECKIN, Assertions.assertThrows(IllegalArgumentException.class, () -> Reservation.create(checkInEqual, checkOutEqual, destination)).getMessage());
         Assertions.assertEquals(Message.CHECKOUT_CANNOT_BE_LESS_THAN_OR_EQUAL_CHECKIN, Assertions.assertThrows(IllegalArgumentException.class, () -> Reservation.create(checkInBefore, checkOutBefore, destination)).getMessage());
+    }
+
+    @Test
+    void validateSuccessfulPriceCalculation()
+    {
+        var reservation = new ReservationTestDataBuilder().build();
+
+        Assertions.assertEquals(8112.0, reservation.calculatePrice());
     }
 }

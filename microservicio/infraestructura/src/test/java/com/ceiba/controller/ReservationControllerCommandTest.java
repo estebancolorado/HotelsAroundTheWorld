@@ -1,8 +1,8 @@
 package com.ceiba.controller;
 
 import com.ceiba.ApplicationMock;
+import com.ceiba.ComandoRespuesta;
 import com.ceiba.reservation.controller.ReservationControllerCommand;
-import com.ceiba.reservation.controller.response.Response;
 import com.ceiba.reservation.command.DestinationCommand;
 import com.ceiba.reservation.command.HotelCommand;
 import com.ceiba.reservation.command.ReservationCommand;
@@ -42,24 +42,18 @@ class ReservationControllerCommandTest
     @DisplayName("It must create a reservation successful and validate if it is saved")
     void postRequestSuccessful() throws Exception
     {
-        var dto = new ReservationDTOTestDataBuilder().build();
+        var reservation = new ReservationDTOTestDataBuilder().build();
 
-        create(dto);
+        create(reservation);
     }
 
-    private void create(ReservationCommand dto) throws Exception
+    private void create(ReservationCommand reservation) throws Exception
     {
-        var result = mocMvc.perform(MockMvcRequestBuilders.post("/api/reservations")
+        mocMvc.perform(MockMvcRequestBuilders.post("/api/reservations")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(dto)))
+                .content(objectMapper.writeValueAsString(reservation)))
                 .andExpect(status().isOk())
-                .andReturn();
-
-        var jsonResult = result.getResponse().getContentAsString();
-        var response = objectMapper.readValue(jsonResult, Response.class);
-
-        var message = response.getMessages().get(0);
-        Assertions.assertEquals("The reservation was saved successful", message);
+                .andExpect(jsonPath("$.valor", is(2)));
     }
 
     @Test
@@ -84,8 +78,8 @@ class ReservationControllerCommandTest
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().is5xxServerError())
-                .andExpect(jsonPath("$.nameException", is("IllegalArgumentException")))
-                .andExpect(jsonPath("$.message", is("Date has not the pattern dd/mm/yyyy")));
+                .andExpect(jsonPath("$.nombreExcepcion", is("IllegalArgumentException")))
+                .andExpect(jsonPath("$.mensaje", is("Date has not the pattern dd/mm/yyyy")));
     }
 
     private void createBadNumberOfGuests(ReservationCommand dto) throws Exception
@@ -96,8 +90,8 @@ class ReservationControllerCommandTest
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().is5xxServerError())
-                .andExpect(jsonPath("$.nameException", is("IllegalArgumentException")))
-                .andExpect(jsonPath("$.message", is("Number of guests cannot be greater than 6")));
+                .andExpect(jsonPath("$.nombreExcepcion", is("IllegalArgumentException")))
+                .andExpect(jsonPath("$.mensaje", is("Number of guests cannot be greater than 6")));
     }
 
     @Test
@@ -106,33 +100,28 @@ class ReservationControllerCommandTest
     {
         var  id = 1;
 
-        var result = mocMvc.perform(MockMvcRequestBuilders.delete("/api/reservations/{id}", id)
+        mocMvc.perform(MockMvcRequestBuilders.delete("/api/reservations/{id}", id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();
 
-        var jsonResult = result.getResponse().getContentAsString();
-        var response = objectMapper.readValue(jsonResult, Response.class);
-
-        var message = response.getMessages().get(0);
-        var data = response.getData().get(0);
-
-        Assertions.assertEquals("The reservation was deleted successful", message);
-        Assertions.assertEquals(data, id);
+        mocMvc.perform(MockMvcRequestBuilders.get("/api/reservations/{i}", id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is5xxServerError());
     }
 
     @Test
     @DisplayName("It must throw an error when does not exists a reservation with an specific identification number")
     void deleteRequestFailed() throws Exception
     {
-        var  id = 2;
+        var  id = 3;
 
         mocMvc.perform(MockMvcRequestBuilders.delete("/api/reservations/{id}", id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is5xxServerError())
-                .andExpect(jsonPath("$.nameException", is("IllegalArgumentException")))
-                .andExpect(jsonPath("$.message", is("There is no reservation on id " + id)));
+                .andExpect(jsonPath("$.nombreExcepcion", is("IllegalArgumentException")))
+                .andExpect(jsonPath("$.mensaje", is("There is no reservation on id " + id)));
     }
 }

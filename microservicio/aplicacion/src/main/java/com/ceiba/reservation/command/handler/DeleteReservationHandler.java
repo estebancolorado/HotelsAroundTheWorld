@@ -1,17 +1,22 @@
 package com.ceiba.reservation.command.handler;
 
+import com.ceiba.manejador.ManejadorComando;
 import com.ceiba.reservation.service.ServiceDeleteReservation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DeleteReservationHandler
+public class DeleteReservationHandler implements ManejadorComando<Long>
 {
-    @Autowired
-    ServiceDeleteReservation serviceDeleteReservation;
+    private final ServiceDeleteReservation serviceDeleteReservation;
 
-    public Long implement(Long id)
+    public DeleteReservationHandler(ServiceDeleteReservation serviceDeleteReservation)
     {
-        return this.serviceDeleteReservation.implement(id);
+        this.serviceDeleteReservation = serviceDeleteReservation;
+    }
+
+    @Override
+    public void ejecutar(Long comando)
+    {
+        this.serviceDeleteReservation.implement(comando);
     }
 }

@@ -37,6 +37,6 @@ public final class ReservationAssemblerInfrastructureImplementation implements R
     @Override
     public ReservationSummaryDTO assembleDTOFromEntity(ReservationEntity entity)
     {
-        return new ReservationSummaryDTO(entity.getId(), entity.getCheckIn(), entity.getCheckOut(), entity.getPrice(), 0.0, getDestinationAssembler().assembleDomainFromEntity(entity.getDestination()));
+        return new ReservationSummaryDTO(entity.getId(), entity.getCheckIn(), entity.getCheckOut(), entity.getPrice(), getDestinationAssembler().assembleDomainFromEntity(entity.getDestination()));
     }
 }

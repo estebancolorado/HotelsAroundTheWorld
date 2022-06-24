@@ -1,12 +1,10 @@
 package com.ceiba.reservation.service;
 
-import com.ceiba.reservation.port.repository.ReservationRepository;
 import com.ceiba.reservation.port.dao.ReservationQuery;
+import com.ceiba.reservation.port.repository.ReservationRepository;
 import com.ceiba.utilitarian.Message;
 import com.ceiba.validator.ValidateObject;
-import org.springframework.stereotype.Service;
 
-@Service
 public class ServiceDeleteReservation
 {
     private final ReservationRepository reservationRepository;
