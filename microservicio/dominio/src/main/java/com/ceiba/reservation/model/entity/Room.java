@@ -1,5 +1,6 @@
 package com.ceiba.reservation.model.entity;
 
+import com.ceiba.dominio.excepcion.InvalidValueException;
 import com.ceiba.utilitarian.Constant;
 import com.ceiba.utilitarian.Message;
 import com.ceiba.validator.ValidateNumber;
@@ -24,7 +25,7 @@ public final class Room
     {
         if(ValidateNumber.isNumberLessThanOrEqual(numberGuests, Constant.MINIMUM_LENGTH_OF_GUESTS))
         {
-            throw new IllegalArgumentException(Message.LOWER_NUMBER_OF_GUESTS_INVALID);
+            throw new InvalidValueException(Message.LOWER_NUMBER_OF_GUESTS_INVALID);
         }
 
         this.numberGuests = numberGuests;

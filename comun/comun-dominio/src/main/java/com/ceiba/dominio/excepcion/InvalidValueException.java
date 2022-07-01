@@ -1,10 +1,10 @@
 package com.ceiba.dominio.excepcion;
 
-public class ExcepcionValorInvalido extends RuntimeException {
+public class InvalidValueException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 	
-    public ExcepcionValorInvalido(String message) {
+    public InvalidValueException(String message) {
         super(message);
     }
 }

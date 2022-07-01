@@ -7,6 +7,10 @@ public final class Constant
 
     }
 
+    public static final int STAR_ONE = 1;
+    public static final int STAR_TWO = 2;
+    public static final int STAR_THREE = 3;
+    public static final int STAR_FOUR = 4;
     public static final int MINIMUM_LENGTH_OF_GUESTS = 0;
     public static final int MAXIMUM_LENGTH_OF_GUESTS_WITH_ONE_STAR = 4;
     public static final int MAXIMUM_LENGTH_OF_GUESTS_WITH_TWO_STAR = 5;

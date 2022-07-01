@@ -1,5 +1,6 @@
 package com.ceiba.model;
 
+import com.ceiba.dominio.excepcion.InvalidValueException;
 import com.ceiba.reservation.model.entity.Hotel;
 import com.ceiba.reservation.model.entity.Room;
 import com.ceiba.utilitarian.Message;
@@ -48,7 +49,7 @@ class HotelTest
 
         var numberOfStars = 6;
 
-        Assertions.assertEquals(Message.NUMBER_OF_STARS_INVALID, Assertions.assertThrows(IllegalArgumentException.class, () -> Hotel.create(numberOfStars, rooms)).getMessage());
+        Assertions.assertEquals(Message.NUMBER_OF_STARS_INVALID, Assertions.assertThrows(InvalidValueException.class, () -> Hotel.create(numberOfStars, rooms)).getMessage());
     }
 
     @Test
@@ -60,6 +61,6 @@ class HotelTest
 
         var numberOfStars = 4;
 
-        Assertions.assertEquals(Message.UPPER_NUMBER_OF_GUESTS_INVALID + 8, Assertions.assertThrows(IllegalArgumentException.class, () -> Hotel.create(numberOfStars, rooms)).getMessage());
+        Assertions.assertEquals(Message.UPPER_NUMBER_OF_GUESTS_INVALID + 8, Assertions.assertThrows(InvalidValueException.class, () -> Hotel.create(numberOfStars, rooms)).getMessage());
     }
 }

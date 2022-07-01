@@ -7,8 +7,8 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.ceiba.dominio.excepcion.ExcepcionLongitudValor;
-import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
+import com.ceiba.dominio.excepcion.LengthException;
+import com.ceiba.dominio.excepcion.InvalidValueException;
 import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
 
 public class ValidadorArgumento {
@@ -23,7 +23,7 @@ public class ValidadorArgumento {
     
     public static void validarLongitud(String valor,int longitud,String mensaje){
         if(valor.length() < longitud){
-            throw new ExcepcionLongitudValor(mensaje);
+            throw new LengthException(mensaje);
         }
     }
     
@@ -35,31 +35,31 @@ public class ValidadorArgumento {
 
     public static void validarPositivo(Double valor, String mensaje) {
         if (valor <= 0) {
-            throw new ExcepcionValorInvalido(mensaje);
+            throw new InvalidValueException(mensaje);
         }
     }
 
     public static void validarIgual(Double valor, Double valorEsperado, String mensaje) {
         if (!valor.equals(valorEsperado)) {
-            throw new ExcepcionValorInvalido(mensaje);
+            throw new InvalidValueException(mensaje);
         }
     }
 
     public static void validarLongitudMinima(Object valor, int longitudMinima, String mensaje) {
         if (valor.toString().length() < longitudMinima) {
-            throw new ExcepcionLongitudValor(mensaje);
+            throw new LengthException(mensaje);
         }
     }
 
     public static void validarMenor(LocalDateTime fechaInicial, LocalDateTime fechaFinal, String mensaje) {
         if (fechaInicial.toLocalDate().isAfter(fechaFinal.toLocalDate())) {
-            throw new ExcepcionValorInvalido(mensaje);
+            throw new InvalidValueException(mensaje);
         }
     }
 
     public static void validarMenor(Long numeroInicial, Long numeroFinal, String mensaje) {
         if (numeroInicial > numeroFinal) {
-            throw new ExcepcionValorInvalido(mensaje);
+            throw new InvalidValueException(mensaje);
         }
     }
 
@@ -68,7 +68,7 @@ public class ValidadorArgumento {
         Matcher matcher = pattern.matcher(correoElectronico);
 
         if (!matcher.matches()) {
-            throw new ExcepcionValorInvalido(mensaje);
+            throw new InvalidValueException(mensaje);
         }
     }
 
@@ -81,7 +81,7 @@ public class ValidadorArgumento {
             if (resultadoOpcional.isPresent()) {
                 enumObtenido = resultadoOpcional.get();
             } else {
-                throw new ExcepcionValorInvalido(mensaje);
+                throw new InvalidValueException(mensaje);
             }
         }
         return enumObtenido;
@@ -91,7 +91,7 @@ public class ValidadorArgumento {
         try {
             Long.parseLong(valor);
         } catch (NumberFormatException numberFormatException) {
-            throw new ExcepcionValorInvalido(mensaje);
+            throw new InvalidValueException(mensaje);
         }
     }
 }

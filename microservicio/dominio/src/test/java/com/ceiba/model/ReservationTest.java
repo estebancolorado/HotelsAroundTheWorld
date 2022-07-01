@@ -1,5 +1,7 @@
 package com.ceiba.model;
 
+import com.ceiba.dominio.excepcion.DateException;
+import com.ceiba.dominio.excepcion.FormatException;
 import com.ceiba.formatter.FormatDate;
 import com.ceiba.reservation.model.entity.Destination;
 import com.ceiba.reservation.model.entity.Hotel;
@@ -53,8 +55,8 @@ class ReservationTest
         var checkIn = FormatDate.getDate("10/07/2022");
         var checkOut = FormatDate.getDate("20/07/2022");
 
-        Assertions.assertEquals(Message.INVALID_DATE_PATTERN, Assertions.assertThrows(IllegalArgumentException.class, () -> Reservation.create(null, checkOut, destination)).getMessage());
-        Assertions.assertEquals(Message.INVALID_DATE_PATTERN, Assertions.assertThrows(IllegalArgumentException.class, () -> Reservation.create(checkIn, null, destination)).getMessage());
+        Assertions.assertEquals(Message.INVALID_DATE_PATTERN, Assertions.assertThrows(FormatException.class, () -> Reservation.create(null, checkOut, destination)).getMessage());
+        Assertions.assertEquals(Message.INVALID_DATE_PATTERN, Assertions.assertThrows(FormatException.class, () -> Reservation.create(checkIn, null, destination)).getMessage());
     }
 
     @Test
@@ -74,7 +76,7 @@ class ReservationTest
         var checkIn = FormatDate.getDate("14/06/2022");
         var checkOut = FormatDate.getDate("20/07/2022");
 
-        Assertions.assertEquals(Message.CHECKIN_CANNOT_BE_LESS_THAN_TODAY, Assertions.assertThrows(IllegalArgumentException.class, () -> Reservation.create(checkIn, checkOut, destination)).getMessage());
+        Assertions.assertEquals(Message.CHECKIN_CANNOT_BE_LESS_THAN_TODAY, Assertions.assertThrows(DateException.class, () -> Reservation.create(checkIn, checkOut, destination)).getMessage());
     }
 
     @Test
@@ -97,8 +99,8 @@ class ReservationTest
         var checkInBefore = FormatDate.getDate("10/07/2022");
         var checkOutBefore = FormatDate.getDate("09/07/2022");
 
-        Assertions.assertEquals(Message.CHECKOUT_CANNOT_BE_LESS_THAN_OR_EQUAL_CHECKIN, Assertions.assertThrows(IllegalArgumentException.class, () -> Reservation.create(checkInEqual, checkOutEqual, destination)).getMessage());
-        Assertions.assertEquals(Message.CHECKOUT_CANNOT_BE_LESS_THAN_OR_EQUAL_CHECKIN, Assertions.assertThrows(IllegalArgumentException.class, () -> Reservation.create(checkInBefore, checkOutBefore, destination)).getMessage());
+        Assertions.assertEquals(Message.CHECKOUT_CANNOT_BE_LESS_THAN_OR_EQUAL_CHECKIN, Assertions.assertThrows(DateException.class, () -> Reservation.create(checkInEqual, checkOutEqual, destination)).getMessage());
+        Assertions.assertEquals(Message.CHECKOUT_CANNOT_BE_LESS_THAN_OR_EQUAL_CHECKIN, Assertions.assertThrows(DateException.class, () -> Reservation.create(checkInBefore, checkOutBefore, destination)).getMessage());
     }
 
     @Test

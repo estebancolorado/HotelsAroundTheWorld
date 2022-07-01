@@ -33,7 +33,7 @@ class ReservationControllerQueryTest
     {
         var dto = new ReservationDTOTestDataBuilder().build();
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/api/reservations")
+        mocMvc.perform(MockMvcRequestBuilders.get("/reservations")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].checkIn", is(dto.getCheckIn())))
@@ -50,16 +50,16 @@ class ReservationControllerQueryTest
     {
         var  id = 1;
 
-        mocMvc.perform(MockMvcRequestBuilders.delete("/api/reservations/{id}", id)
+        mocMvc.perform(MockMvcRequestBuilders.delete("/reservations/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/api/reservations")
+        mocMvc.perform(MockMvcRequestBuilders.get("/reservations")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is5xxServerError())
+                .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("IllegalArgumentException")))
-                .andExpect(jsonPath("$.mensaje", is("There is no reservations on app ")));
+                .andExpect(jsonPath("$.mensaje", is("No hay reservaciones en la aplicación")));
     }
 
     @Test
@@ -69,7 +69,7 @@ class ReservationControllerQueryTest
         var dto = new ReservationDTOTestDataBuilder().build();
         var id = 1;
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/api/reservations/" + id)
+        mocMvc.perform(MockMvcRequestBuilders.get("/reservations/" + id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.checkIn", is(dto.getCheckIn())))
@@ -86,10 +86,10 @@ class ReservationControllerQueryTest
     {
         var id = 2;
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/api/reservations/" + id)
+        mocMvc.perform(MockMvcRequestBuilders.get("/reservations/" + id)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is5xxServerError())
+                .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("IllegalArgumentException")))
-                .andExpect(jsonPath("$.mensaje", is("There is no reservation on id " + id)));
+                .andExpect(jsonPath("$.mensaje", is("No hay reservaciones con el id " + id)));
     }
 }

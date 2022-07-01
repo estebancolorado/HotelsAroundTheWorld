@@ -1,5 +1,7 @@
 package com.ceiba.reservation.model.entity;
 
+import com.ceiba.dominio.excepcion.DateException;
+import com.ceiba.dominio.excepcion.FormatException;
 import com.ceiba.formatter.FormatDate;
 import com.ceiba.utilitarian.Constant;
 import com.ceiba.utilitarian.Message;
@@ -33,12 +35,12 @@ public final class Reservation
     {
         if(ValidateString.isDateWrong(FormatDate.getStringDate(checkIn)))
         {
-            throw new IllegalArgumentException(Message.INVALID_DATE_PATTERN);
+            throw new FormatException(Message.INVALID_DATE_PATTERN);
         }
 
         if(checkIn.isBefore(LocalDate.now()))
         {
-            throw new IllegalArgumentException(Message.CHECKIN_CANNOT_BE_LESS_THAN_TODAY);
+            throw new DateException(Message.CHECKIN_CANNOT_BE_LESS_THAN_TODAY);
         }
 
         this.checkIn = checkIn;
@@ -48,12 +50,12 @@ public final class Reservation
     {
         if(ValidateString.isDateWrong(FormatDate.getStringDate(checkOut)))
         {
-            throw new IllegalArgumentException(Message.INVALID_DATE_PATTERN);
+            throw new FormatException(Message.INVALID_DATE_PATTERN);
         }
 
         if(checkOut.isBefore(this.checkIn) || checkOut.isEqual(this.checkIn))
         {
-            throw new IllegalArgumentException(Message.CHECKOUT_CANNOT_BE_LESS_THAN_OR_EQUAL_CHECKIN);
+            throw new DateException(Message.CHECKOUT_CANNOT_BE_LESS_THAN_OR_EQUAL_CHECKIN);
         }
 
         this.checkOut = checkOut;

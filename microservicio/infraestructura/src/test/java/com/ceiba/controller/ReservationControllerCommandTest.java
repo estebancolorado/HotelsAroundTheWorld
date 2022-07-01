@@ -49,7 +49,7 @@ class ReservationControllerCommandTest
 
     private void create(ReservationCommand reservation) throws Exception
     {
-        mocMvc.perform(MockMvcRequestBuilders.post("/api/reservations")
+        mocMvc.perform(MockMvcRequestBuilders.post("/reservations")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(reservation)))
                 .andExpect(status().isOk())
@@ -74,24 +74,24 @@ class ReservationControllerCommandTest
         dto.setCheckIn("2022/07/10");
         dto.setCheckOut("2022/07/15");
 
-        mocMvc.perform(MockMvcRequestBuilders.post("/api/reservations")
+        mocMvc.perform(MockMvcRequestBuilders.post("/reservations")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(dto)))
-                .andExpect(status().is5xxServerError())
-                .andExpect(jsonPath("$.nombreExcepcion", is("IllegalArgumentException")))
-                .andExpect(jsonPath("$.mensaje", is("Date has not the pattern dd/mm/yyyy")));
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.nombreExcepcion", is("FormatException")))
+                .andExpect(jsonPath("$.mensaje", is("La fecha no cumple el patrón: dd/mm/yyyy")));
     }
 
     private void createBadNumberOfGuests(ReservationCommand dto) throws Exception
     {
         dto.getDestination().getHotel().getRooms().get(0).setNumberGuests(7);
 
-        mocMvc.perform(MockMvcRequestBuilders.post("/api/reservations")
+        mocMvc.perform(MockMvcRequestBuilders.post("/reservations")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto)))
-                .andExpect(status().is5xxServerError())
-                .andExpect(jsonPath("$.nombreExcepcion", is("IllegalArgumentException")))
-                .andExpect(jsonPath("$.mensaje", is("Number of guests cannot be greater than 6")));
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.nombreExcepcion", is("InvalidValueException")))
+                .andExpect(jsonPath("$.mensaje", is("El numero de huéspedes no puede ser mayor que 6")));
     }
 
     @Test
@@ -100,15 +100,15 @@ class ReservationControllerCommandTest
     {
         var  id = 1;
 
-        mocMvc.perform(MockMvcRequestBuilders.delete("/api/reservations/{id}", id)
+        mocMvc.perform(MockMvcRequestBuilders.delete("/reservations/{id}", id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();
 
-        mocMvc.perform(MockMvcRequestBuilders.get("/api/reservations/{i}", id)
+        mocMvc.perform(MockMvcRequestBuilders.get("/reservations/{i}", id)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is5xxServerError());
+                .andExpect(status().is4xxClientError());
     }
 
     @Test
@@ -117,11 +117,11 @@ class ReservationControllerCommandTest
     {
         var  id = 3;
 
-        mocMvc.perform(MockMvcRequestBuilders.delete("/api/reservations/{id}", id)
+        mocMvc.perform(MockMvcRequestBuilders.delete("/reservations/{id}", id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().is5xxServerError())
+                .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.nombreExcepcion", is("IllegalArgumentException")))
-                .andExpect(jsonPath("$.mensaje", is("There is no reservation on id " + id)));
+                .andExpect(jsonPath("$.mensaje", is("No hay reservaciones con el id " + id)));
     }
 }

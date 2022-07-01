@@ -1,5 +1,6 @@
 package com.ceiba.reservation.model.entity;
 
+import com.ceiba.dominio.excepcion.InvalidValueException;
 import com.ceiba.utilitarian.Constant;
 import com.ceiba.utilitarian.Message;
 import com.ceiba.validator.ValidateNumber;
@@ -27,7 +28,7 @@ public final class Hotel
     {
         if(!ValidateNumber.isNumberBetween(numberStars, Constant.LOWER_LIMIT_OF_STARS, Constant.UPPER_LIMIT_OF_STARS))
         {
-            throw new IllegalArgumentException(Message.NUMBER_OF_STARS_INVALID);
+            throw new InvalidValueException(Message.NUMBER_OF_STARS_INVALID);
         }
 
         this.numberStars = numberStars;
@@ -41,7 +42,7 @@ public final class Hotel
         {
             if(room.getNumberGuests() > guestsAllowed)
             {
-                throw new IllegalArgumentException(Message.UPPER_NUMBER_OF_GUESTS_INVALID + guestsAllowed);
+                throw new InvalidValueException(Message.UPPER_NUMBER_OF_GUESTS_INVALID + guestsAllowed);
             }
         });
 
@@ -50,19 +51,19 @@ public final class Hotel
 
     private int calculateNumberGuestsAllowed(int numberStars)
     {
-        if(numberStars == 1)
+        if(numberStars == Constant.STAR_ONE)
         {
             return Constant.MAXIMUM_LENGTH_OF_GUESTS_WITH_ONE_STAR;
         }
-        else if(numberStars == 2)
+        else if(numberStars == Constant.STAR_TWO)
         {
             return Constant.MAXIMUM_LENGTH_OF_GUESTS_WITH_TWO_STAR;
         }
-        else if(numberStars == 3)
+        else if(numberStars == Constant.STAR_THREE)
         {
             return Constant.MAXIMUM_LENGTH_OF_GUESTS_WITH_THREE_STAR;
         }
-        else if(numberStars == 4)
+        else if(numberStars == Constant.STAR_FOUR)
         {
             return Constant.MAXIMUM_LENGTH_OF_GUESTS_WITH_FOUR_STAR;
         }

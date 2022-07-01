@@ -1,5 +1,7 @@
 package com.ceiba.model;
 
+import com.ceiba.dominio.excepcion.LengthException;
+import com.ceiba.dominio.excepcion.WithOutDataException;
 import com.ceiba.reservation.model.entity.Destination;
 import com.ceiba.reservation.model.entity.Hotel;
 import com.ceiba.reservation.model.entity.Room;
@@ -39,8 +41,8 @@ class DestinationTest
         var numberOfStars = 3;
         var hotel = Hotel.create(numberOfStars, rooms);
 
-        Assertions.assertEquals(Message.CITY_CANNOT_BE_EMPTY, Assertions.assertThrows(IllegalArgumentException.class, () -> Destination.create(null, "Estados Unidos de America", hotel)).getMessage());
-        Assertions.assertEquals(Message.COUNTRY_CANNOT_BE_EMPTY, Assertions.assertThrows(IllegalArgumentException.class, () -> Destination.create("Nueva York", null, hotel)).getMessage());
+        Assertions.assertEquals(Message.CITY_CANNOT_BE_EMPTY, Assertions.assertThrows(WithOutDataException.class, () -> Destination.create(null, "Estados Unidos de America", hotel)).getMessage());
+        Assertions.assertEquals(Message.COUNTRY_CANNOT_BE_EMPTY, Assertions.assertThrows(WithOutDataException.class, () -> Destination.create("Nueva York", null, hotel)).getMessage());
     }
 
     @Test
@@ -53,8 +55,8 @@ class DestinationTest
         var numberOfStars = 3;
         var hotel = Hotel.create(numberOfStars, rooms);
 
-        Assertions.assertEquals(Message.CITY_CANNOT_BE_EMPTY, Assertions.assertThrows(IllegalArgumentException.class, () -> Destination.create("", "Estados Unidos de America", hotel)).getMessage());
-        Assertions.assertEquals(Message.COUNTRY_CANNOT_BE_EMPTY, Assertions.assertThrows(IllegalArgumentException.class, () -> Destination.create("Nueva York", "", hotel)).getMessage());
+        Assertions.assertEquals(Message.CITY_CANNOT_BE_EMPTY, Assertions.assertThrows(WithOutDataException.class, () -> Destination.create("", "Estados Unidos de America", hotel)).getMessage());
+        Assertions.assertEquals(Message.COUNTRY_CANNOT_BE_EMPTY, Assertions.assertThrows(WithOutDataException.class, () -> Destination.create("Nueva York", "", hotel)).getMessage());
     }
 
     @Test
@@ -70,7 +72,7 @@ class DestinationTest
         var city = "Taumatawhakatangihangak oauauotamateaturipukaka pikimaungahoronukupokaiwhe nua kitanatahut";
         var country = "Nueva Zelanda";
 
-        Assertions.assertEquals(Message.INVALID_CITY_LENGTH, Assertions.assertThrows(IllegalArgumentException.class, () -> Destination.create(city, country, hotel)).getMessage());
+        Assertions.assertEquals(Message.INVALID_CITY_LENGTH, Assertions.assertThrows(LengthException.class, () -> Destination.create(city, country, hotel)).getMessage());
     }
 
     @Test
@@ -86,6 +88,6 @@ class DestinationTest
         var city = "Belfast";
         var country = "Reino Unido de Gran Bretaña e Irlanda del Norte y la Union Europea";
 
-        Assertions.assertEquals(Message.INVALID_COUNTRY_LENGTH, Assertions.assertThrows(IllegalArgumentException.class, () -> Destination.create(city, country, hotel)).getMessage());
+        Assertions.assertEquals(Message.INVALID_COUNTRY_LENGTH, Assertions.assertThrows(LengthException.class, () -> Destination.create(city, country, hotel)).getMessage());
     }
 }

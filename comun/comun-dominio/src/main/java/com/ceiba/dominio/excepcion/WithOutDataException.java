@@ -1,10 +1,10 @@
 package com.ceiba.dominio.excepcion;
 
-public class ExcepcionLongitudValor extends RuntimeException {
+public class WithOutDataException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
-
-	public ExcepcionLongitudValor(String message) {
+	
+    public WithOutDataException(String message) {
         super(message);
     }
 }
