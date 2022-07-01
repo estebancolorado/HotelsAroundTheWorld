@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/reservations")
+@RequestMapping("/reservations")
 @Tag(name = "Reservation Controller Query")
 public class ReservationControllerQuery
 {

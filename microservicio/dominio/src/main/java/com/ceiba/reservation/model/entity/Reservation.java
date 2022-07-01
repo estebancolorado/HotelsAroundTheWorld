@@ -13,6 +13,7 @@ public final class Reservation
 {
     private LocalDate checkIn;
     private LocalDate checkOut;
+    private final double price;
     private final Destination destination;
 
     private Reservation(LocalDate checkIn, LocalDate checkOut, Destination destination)
@@ -20,6 +21,7 @@ public final class Reservation
         setCheckIn(checkIn);
         setCheckOut(checkOut);
         this.destination = destination;
+        this.price = calculatePrice();
     }
 
     public static Reservation create(LocalDate checkIn, LocalDate checkOut, Destination destination)
@@ -57,35 +59,53 @@ public final class Reservation
         this.checkOut = checkOut;
     }
 
-    public double calculatePrice()
+    private double calculatePrice()
     {
         double finalPrice = Constant.INITIAL_PRICE;
 
         if(this.destination.getHotel().getNumberStars() > 1)
         {
-            for(int i = 0; i < this.destination.getHotel().getNumberStars() - 1; i++)
-            {
-                finalPrice = finalPrice + (finalPrice * Constant.PERCENTAGE_REGARDING_THE_NUMBER_OF_STARS);
-            }
+            finalPrice = getPriceDependingNumberStars(finalPrice);
         }
 
         if(this.destination.getHotel().getRooms().size() > 1)
         {
-            for(int i = 0; i < this.destination.getHotel().getRooms().size() - 1; i++)
-            {
-                finalPrice = finalPrice + (finalPrice * Constant.PERCENTAGE_REGARDING_THE_NUMBER_OF_GUESTS);
-            }
+            finalPrice = getPriceDependingNumberGuestsInRooms(finalPrice);
         }
 
-        for(int i = 0; i < this.destination.getHotel().getRooms().size(); i++)
-        {
-            finalPrice = finalPrice * this.destination.getHotel().getRooms().get(0).getNumberGuests();
-        }
+        finalPrice = getPriceDependingNumberGuestsInASingleRoom(finalPrice);
 
         long days = ChronoUnit.DAYS.between(this.checkIn, this.checkOut);
 
         finalPrice = finalPrice * days;
 
         return Math.round(finalPrice*100.0)/100.0;
+    }
+
+    private double getPriceDependingNumberGuestsInASingleRoom(double finalPrice)
+    {
+        for(int i = 0; i < this.destination.getHotel().getRooms().size(); i++)
+        {
+            finalPrice = finalPrice * this.destination.getHotel().getRooms().get(0).getNumberGuests();
+        }
+        return finalPrice;
+    }
+
+    private double getPriceDependingNumberGuestsInRooms(double finalPrice)
+    {
+        for(int i = 0; i < this.destination.getHotel().getRooms().size() - 1; i++)
+        {
+            finalPrice = finalPrice + (finalPrice * Constant.PERCENTAGE_REGARDING_THE_NUMBER_OF_GUESTS);
+        }
+        return finalPrice;
+    }
+
+    private double getPriceDependingNumberStars(double finalPrice)
+    {
+        for(int i = 0; i < this.destination.getHotel().getNumberStars() - 1; i++)
+        {
+            finalPrice = finalPrice + (finalPrice * Constant.PERCENTAGE_REGARDING_THE_NUMBER_OF_STARS);
+        }
+        return finalPrice;
     }
 }

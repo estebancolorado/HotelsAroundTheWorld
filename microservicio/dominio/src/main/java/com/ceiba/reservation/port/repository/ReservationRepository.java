@@ -4,6 +4,6 @@ import com.ceiba.reservation.model.entity.Reservation;
 
 public interface ReservationRepository
 {
-    Long save(Reservation reservation, double price);
-    Long delete(Long id);
+    Long save(Reservation reservation);
+    void delete(Long id);
 }

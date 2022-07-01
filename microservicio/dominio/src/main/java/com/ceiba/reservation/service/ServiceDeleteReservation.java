@@ -18,11 +18,15 @@ public class ServiceDeleteReservation
 
     public Long implement(Long id)
     {
-        if(ValidateObject.isNull(this.reservationQuery.getById(id)))
+        var reservation = this.reservationQuery.getById(id);
+
+        if(ValidateObject.isNull(reservation))
         {
             throw new IllegalArgumentException(Message.RESERVATION_DOES_NOT_EXISTS_WITH_ID + id);
         }
 
-        return this.reservationRepository.delete(id);
+        this.reservationRepository.delete(id);
+
+        return id;
     }
 }

@@ -14,8 +14,6 @@ public class ServiceSaveReservation
 
     public Long implement(Reservation reservation)
     {
-        var price = reservation.calculatePrice();
-
-        return this.reservationRepository.save(reservation, price);
+        return this.reservationRepository.save(reservation);
     }
 }

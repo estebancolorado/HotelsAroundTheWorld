@@ -24,11 +24,9 @@ public class ReservationRepositoryImplementation implements ReservationRepositor
     ReservationDAO reservationDAO;
 
     @Override
-    public Long save(Reservation reservation, double price)
+    public Long save(Reservation reservation)
     {
         var entity = getReservationAssembler().assembleEntityFromDomain(reservation);
-
-        entity.setPrice(price);
 
         var hotelId = hotelDAO.save(entity.getDestination().getHotel());
 
@@ -40,7 +38,7 @@ public class ReservationRepositoryImplementation implements ReservationRepositor
     }
 
     @Override
-    public Long delete(Long id)
+    public void delete(Long id)
     {
         var reservation = reservationDAO.findById(id);
 
@@ -48,7 +46,5 @@ public class ReservationRepositoryImplementation implements ReservationRepositor
         destinationDAO.delete(reservation.getDestination().getId());
         reservation.getDestination().getHotel().getRooms().forEach(room -> roomDAO.delete(room.getId()));
         hotelDAO.delete(reservation.getDestination().getHotel().getId());
-
-        return id;
     }
 }

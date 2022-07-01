@@ -106,6 +106,6 @@ class ReservationTest
     {
         var reservation = new ReservationTestDataBuilder().build();
 
-        Assertions.assertEquals(8112.0, reservation.calculatePrice());
+        Assertions.assertEquals(8112.0, reservation.getPrice());
     }
 }

@@ -6,7 +6,7 @@ jasypt:
 server:
    port: 8080
    servlet:
-      context-path: /microservice
+      context-path: /api
       session:
          timeout: 21600s
 springdoc:

@@ -31,7 +31,7 @@ public final class ReservationAssemblerInfrastructureImplementation implements R
     @Override
     public ReservationEntity assembleEntityFromDomain(Reservation domain)
     {
-        return new ReservationEntity(1L, FormatDate.getStringDate(domain.getCheckIn()), FormatDate.getStringDate(domain.getCheckOut()), 0.0, getDestinationAssembler().assembleEntityFromDomain(domain.getDestination()));
+        return new ReservationEntity(1L, FormatDate.getStringDate(domain.getCheckIn()), FormatDate.getStringDate(domain.getCheckOut()), domain.getPrice(), getDestinationAssembler().assembleEntityFromDomain(domain.getDestination()));
     }
 
     @Override

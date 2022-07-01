@@ -27,19 +27,22 @@ class ServiceDeleteReservationTest
 
         Mockito.verify(repositoryCommand, Mockito.times(1)).delete(1L);
 
-        Assertions.assertEquals(0, id);
+        Assertions.assertEquals(1L, id);
     }
 
     @Test
     void returnErrorIfDoesNotExist()
     {
+        var id = 1L;
+
         var repositoryCommand = Mockito.mock(ReservationRepository.class);
         var repositoryQuery = Mockito.mock(ReservationQuery.class);
 
         var service = new ServiceDeleteReservation(repositoryCommand, repositoryQuery);
 
-        Mockito.when(repositoryCommand.delete(1L)).thenReturn(1L);
+        Mockito.when(repositoryQuery.getById(id)).thenReturn(null);
 
-        Assertions.assertEquals(Message.RESERVATION_DOES_NOT_EXISTS_WITH_ID + 1L, Assertions.assertThrows(IllegalArgumentException.class, () -> service.implement(1L)).getMessage());
+        Assertions.assertEquals(Message.RESERVATION_DOES_NOT_EXISTS_WITH_ID + id, Assertions.assertThrows(IllegalArgumentException.class, () -> service.implement(id)).getMessage());
     }
+
 }

@@ -6,8 +6,11 @@ import com.ceiba.reservation.service.ServiceSaveReservation;
 import com.ceiba.testdatabuilder.ReservationTestDataBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.junit.runner.RunWith;
+import org.mockito.*;
+import org.mockito.junit.MockitoJUnitRunner;
 
+@RunWith(MockitoJUnitRunner.class)
 class ServiceSaveReservationTest
 {
     @Test
@@ -19,12 +22,13 @@ class ServiceSaveReservationTest
 
         var service = new ServiceSaveReservation(repository);
 
-        Mockito.when(repository.save(Mockito.any(Reservation.class), Mockito.any(double.class))).thenReturn(1L);
+        Mockito.when(repository.save(Mockito.any(Reservation.class))).thenReturn(1L);
 
         var id = service.implement(reservation);
 
-        Mockito.verify(repository, Mockito.times(1)).save(reservation, reservation.calculatePrice());
+        Mockito.verify(repository, Mockito.times(1)).save(reservation);
 
         Assertions.assertEquals(1L, id);
+        Assertions.assertEquals(8112.0, reservation.getPrice());
     }
 }

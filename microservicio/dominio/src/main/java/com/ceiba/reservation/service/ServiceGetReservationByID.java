@@ -20,7 +20,7 @@ public class ServiceGetReservationByID
 
         if(ValidateObject.isNull(reservation))
         {
-                throw new IllegalArgumentException(Message.RESERVATION_DOES_NOT_EXISTS_WITH_ID + id);
+            throw new IllegalArgumentException(Message.RESERVATION_DOES_NOT_EXISTS_WITH_ID + id);
         }
 
         return reservation;
